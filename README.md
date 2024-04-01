@@ -46,5 +46,5 @@
 
 
 ### 使用素材
-- 掲載する映画情報は以下から取得
+- 掲載する映画情報は以下から取得(使用APIについて事前学習済み)
   - https://developer.themoviedb.org/docs/getting-started
