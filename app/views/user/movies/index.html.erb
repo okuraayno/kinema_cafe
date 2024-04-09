@@ -1,0 +1,28 @@
+<div class='container'>
+  <div class='row'>
+    <%= form_with(url: movies_path, method: :get) do |form| %>
+      <%= form.text_field :looking_for, placeholder: 'Movie Title...', size: 30 %>
+      <%= form.submit 'search', class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+
+  <div class='row mt-5'>
+    <% @movies.each do |movie| %>
+      <div class='col-12 col-sm-6 col-md-4 col-lg-3'>
+        <div class='card bg-transparent border-0' style='width: 100%;'>
+          <%= link_to movie_path(movie['id']) do %>
+            <% if movie['poster_path'] %>
+              <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: '300x380', style: 'max-width: 100%;' %>
+            <% else %>
+              <%= image_tag '/kinema_cafe/app/assets/images/no_image_tate.jpg', size: '300x380', style: 'max-width: 100%;' %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class='card-body'>
+          <p class='item-details item-name card-text'><%= movie['title'] %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+</div>

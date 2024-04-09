@@ -20,7 +20,6 @@ class User::UsersController < ApplicationController
   end
 
 
-
   private
   
   def user_params
@@ -40,4 +39,5 @@ class User::UsersController < ApplicationController
       redirect_to user_path(current_user), notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
     end
   end
+  
 end

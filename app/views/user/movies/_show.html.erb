@@ -1,0 +1,18 @@
+<table class='table'>
+  <tr>
+    <% if movie['poster_path'] %>
+      <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: '300x380', style: "max-width: 100%;"%>
+    <% else %>
+      <%= image_tag '/kinema_cafe/app/assets/images/no_image_tate.jpg', size: '300x380', style: "max-width: 100%;"%>
+    <% end %>
+  </tr>
+  <tr>
+    <th><%= movie['title'] %></th>
+  </tr>
+  <tr>
+    <th>レーティング入れる</th>
+  </tr>
+  <tr>
+    <th><%= movie['overview'] %></th>
+  </tr>
+</table>
