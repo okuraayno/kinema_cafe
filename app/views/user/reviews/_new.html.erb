@@ -1,4 +1,5 @@
 <%= form_with model:review, url:movie_reviews_path, local:true do |f| %>
+  <%= f.hidden_field :movie_id, value: @movie['id'] %>
 
   <div id="stars"></div>
   
@@ -12,7 +13,7 @@
         starOn: "<%= asset_path('star-on.png') %>",
         starOff: "<%= asset_path('star-off.png') %>",
         starHalf: "<%= asset_path('star-half.png') %>",
-        scoreName: 'eview[star]',
+        scoreName: 'review[star]',
       };
       raty(elem, opt);
     });
