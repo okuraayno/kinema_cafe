@@ -1,24 +1,30 @@
 class User::ReviewsController < ApplicationController
-  
+
   def new
-    @review = Review.new
     movie_id = params[:movie_id]
+    pp movie_id
     url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
-    @url_params = URI.parse(url)
-    # 実際にアクセスしてデータを取得
-    @api_datas  = Net::HTTP.get(@url_params)
-    # JSONデータを連想配列で取得
-    @movies_infos     = JSON.parse(@api_datas)
-    # JSONデータのresults配列内を参照
-    @movies_datas = @movies_infos['results']
+    @movie = JSON.parse(Net::HTTP.get(URI.parse(url)))
+    @review = Review.new
   end
-  
-  
-  
+
+  def create
+    movie_id = params[:id]
+    url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
+    @movie = JSON.parse(Net::HTTP.get(URI.parse(url)))
+    @review = Review.new(review_params)
+    @review.user_id = current_user.id
+    if @review.save
+      redirect_to movie_path(@movie), notice: "You have created book successfully."
+    else
+      render 'new'
+    end
+  end
+
   private
 
   def review_params
-    params.require(:review).permit(:title, :image, :overview, :review_title, :review_comment, :star)
+    params.require(:review).permit(:movie_id, :review_title, :review_comment, :star)
   end
 
 end

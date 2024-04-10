@@ -1,0 +1,28 @@
+<%= form_with model:review, url:movie_reviews_path, local:true do |f| %>
+
+  <div id="stars"></div>
+  
+  <script>
+    $(document).on('turbolinks:load', function() {
+      let elem = document.querySelector('#stars');
+      if(elem == null) return;
+
+      elem.innerHTML = ""
+      let opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        scoreName: 'eview[star]',
+      };
+      raty(elem, opt);
+    });
+  </script>
+
+  <div class="form-group mb-3">
+    <%= f.text_field :review_title, placeholder: "review title...", class: 'form-control' %>
+  </div>
+  <div class="form-group mb-3">
+    <%= f.text_area :review_comment, placeholder: "review...", class: 'form-control' %>
+  </div>
+  <%= f.submit "review" %>
+<% end %>

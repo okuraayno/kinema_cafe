@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :reviews, dependent: :destroy
+
 # ゲストログイン用
   GUEST_USER_EMAIL = "guest@example.com"
 
