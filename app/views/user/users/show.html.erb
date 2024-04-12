@@ -45,7 +45,7 @@
   
   <div class="tab-content mt-3">
     <div id="reviews" class="tab-pane fade show active">
-      <p>セクション1のコンテンツが表示されます。</p>
+      <%= render 'user/reviews/index', reviews: @reviews, movie: @movie %>
     </div>
     <div id="like" class="tab-pane fade">
       <p>セクション2のコンテンツが表示されます。</p>

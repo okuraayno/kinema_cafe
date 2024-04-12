@@ -1,8 +1,20 @@
 class User::UsersController < ApplicationController
   
-  def show
-    @user = User.find(params[:id])
+def show
+  # 投稿ユーザーの特定
+  @user = User.find(params[:id])
+  # 上記で特定したユーザーが投稿したレビューを取得
+  @reviews = @user.reviews
+  # APIから取得したデータを格納する配列を作成
+  @movie = []
+  # レビューごとにAPIにアクセスしてデータを取得
+  @reviews.each do |review|
+    movie_id = review.movie_id
+    url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
+    movie_data = JSON.parse(Net::HTTP.get(URI.parse(url)))
+    @movie << movie_data
   end
+end
   
   def edit
     is_matching_login_user

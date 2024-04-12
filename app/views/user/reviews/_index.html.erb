@@ -1,0 +1,44 @@
+<% reviews.each_with_index do |review, index| %>
+  <table class='mb-3'>
+    <thead>
+      <tr>
+        <th>
+          <%= link_to movie_path(movie[index]['id']) do %>
+            <%= movie[index]['title'] %>
+          <% end %>へのレビュー
+        </th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr>
+        <th>
+          <%= link_to movie_review_path(movie[index]['id'])  do %>
+            <%= review.title %>
+          <% end %>
+        </th>
+      </tr>
+      <tr>
+        <th id="star_<%= review.id %>"></th>
+      </tr>
+      <script>
+        $(document).on('turbolinks:load', function() {
+          let elem = document.querySelector('#star_<%= review.id %>');
+          if (elem == null) return;
+          elem.innerHTML = "";
+          let opt = {
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            score: "<%= review.star %>",
+            readOnly: true,
+          };
+          raty(elem, opt);
+        });
+      </script>
+      <tr>
+        <td><%= review.comment %></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
