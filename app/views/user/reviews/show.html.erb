@@ -34,7 +34,7 @@
           </tr>
           <tr>
             <% if @review.user == current_user %>
-              <td><%= link_to 'Edit', edit_movie_review_path(movie_id: @movie['id']), class:"btn btn-secondary" %></td>
+              <td><%= link_to 'Edit', edit_movie_review_path(@review.movie_id, @review.id), class:"btn btn-secondary" %></td>
               <td><%= link_to 'Destroy', @reviews, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
           </tr>

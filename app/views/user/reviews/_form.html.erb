@@ -1,4 +1,4 @@
-<%= form_with model:review, url:movie_reviews_path, local:true do |f| %>
+<%= form_with model: review, url: (review.persisted? ? movie_review_path(review.movie_id, review.id) : movie_reviews_path), local: true do |f| %>
   <%= f.hidden_field :movie_id, value: @movie['id'] %>
 
   <div id="stars"></div>
