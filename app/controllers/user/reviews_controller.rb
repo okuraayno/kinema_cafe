@@ -1,5 +1,11 @@
 class User::ReviewsController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit]
+
+  def show
+    movie_id = params[:movie_id]
+    url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
+    @movie = JSON.parse(Net::HTTP.get(URI.parse(url)))
+    @review = Review.find(params[:id])
+  end
 
   def new
     movie_id = params[:movie_id]
@@ -18,6 +24,25 @@ class User::ReviewsController < ApplicationController
       redirect_to movie_path(movie['id']) , notice: "You have created book successfully."
     else
       render 'new'
+    end
+  end
+  
+  def edit
+    movie_id = params[:movie_id]
+    url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
+    @movie = JSON.parse(Net::HTTP.get(URI.parse(url)))
+    @review = Review.find(params[:id])
+  end
+
+  def update
+    movie_id = params[:movie_id]
+    url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
+    movie = JSON.parse(Net::HTTP.get(URI.parse(url)))
+    review = Review.find(params[:id])
+    if review.update(review_params)
+      redirect_to movie_path(movie['id']), notice: "You have updated book successfully."
+    else
+      render "edit"
     end
   end
 

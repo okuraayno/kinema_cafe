@@ -1,0 +1,45 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-6'>
+      <%= render 'user/movies/show', movie: @movie %>
+    </div>
+    
+    <div class='col-6'>
+      <table>
+        <thead>
+          <th><%= @review.title %></th>
+        </thead>
+    
+        <tbody>
+          <tr>
+            <th id="star_<%= @review.id %>"></th>
+          </tr>
+          <script>
+            $(document).on('turbolinks:load', function() {
+              let elem = document.querySelector('#star_<%= @review.id %>');
+              if (elem == null) return;
+              elem.innerHTML = "";
+              let opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                score: "<%= @review.star %>",
+                readOnly: true,
+              };
+              raty(elem, opt);
+            });
+          </script>
+          <tr>
+            <td><%= @review.comment %></td>
+          </tr>
+          <tr>
+            <% if @review.user == current_user %>
+              <td><%= link_to 'Edit', edit_movie_review_path(movie_id: @movie['id']), class:"btn btn-secondary" %></td>
+              <td><%= link_to 'Destroy', @reviews, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
