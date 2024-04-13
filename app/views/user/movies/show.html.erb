@@ -5,8 +5,10 @@
     </div>
 
     <div class='col-6'>
+      <div id="favorite_btn_<%= @movie['id'] %>" >
+        <%= render 'user/favorites/btn', movie: @movie%>
+      </div>
       <%= link_to "review", new_movie_review_path(movie_id: @movie['id']), class:"btn btn-secondary" %>
     </div>
-    
   </div>
 </div>

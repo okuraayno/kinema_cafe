@@ -1,6 +1,5 @@
 class User::MoviesController < ApplicationController
 
-# ムービー一覧画面
   def index
     if params[:looking_for]
       movie_title = params[:looking_for]
@@ -11,12 +10,10 @@ class User::MoviesController < ApplicationController
     @movies = JSON.parse(Net::HTTP.get(URI.parse(url)))['results']
   end
 
-# ムービー詳細画面
   def show
     movie_id = params[:id]
     url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
     @movie = JSON.parse(Net::HTTP.get(URI.parse(url)))
   end
-
 
 end

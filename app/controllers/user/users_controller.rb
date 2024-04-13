@@ -1,18 +1,32 @@
 class User::UsersController < ApplicationController
-  
+
+# set_movie呼び出し
+  before_action :set_movie, only: [:show]
+
 def show
   # 投稿ユーザーの特定
   @user = User.find(params[:id])
   # 上記で特定したユーザーが投稿したレビューを取得
   @reviews = @user.reviews
   # APIから取得したデータを格納する配列を作成
-  @movie = []
+  @review_movies = []
   # レビューごとにAPIにアクセスしてデータを取得
   @reviews.each do |review|
     movie_id = review.movie_id
     url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
     movie_data = JSON.parse(Net::HTTP.get(URI.parse(url)))
-    @movie << movie_data
+    @review_movies << movie_data
+  end
+
+  @favorites = @user.favorites
+
+  @favorite_movies = []
+
+  @favorites.each do |favorite|
+    movie_id = favorite.movie_id
+    url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
+    movie_data = JSON.parse(Net::HTTP.get(URI.parse(url)))
+    @favorite_movies << movie_data
   end
 end
   
@@ -31,8 +45,11 @@ end
     end
   end
 
-
   private
+
+  def set_movie
+    @movie = Movie.fetch_movie_data(params[:movie_id])
+  end
   
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)

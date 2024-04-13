@@ -1,8 +1,8 @@
 <% reviews.each_with_index do |review, index| %>
-  <table class='mb-3'>
+  <table class='my-4 mx-3'>
     <thead>
       <tr>
-        <th>
+        <th><i class="fa-solid fa-feather"></i>
           <%= link_to movie_path(movie[index]['id']) do %>
             <%= movie[index]['title'] %>
           <% end %>へのレビュー

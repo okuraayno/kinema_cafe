@@ -2,6 +2,8 @@
 
 one:
   user_id: 1
+  movie_id: 1
 
 two:
   user_id: 1
+  movie_id: 1

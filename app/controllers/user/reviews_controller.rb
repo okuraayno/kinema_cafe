@@ -25,15 +25,17 @@ class User::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
   end
 
+  # ローカル変数にする
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
-      redirect_to movie_path(@movie['id']), notice: "You have updated book successfully."
+      redirect_to movie_path(@movie['id'])
     else
-      render "edit"
+      render "edit" 
     end
   end
   
+  # ローカル変数にする
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
