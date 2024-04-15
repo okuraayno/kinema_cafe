@@ -1,7 +1,7 @@
 class User::MoviesController < ApplicationController
 
   def index
-    if params[:looking_for]
+    if params[:looking_for].present?
       movie_title = params[:looking_for]
       url = "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['TMDB_API_KEY']}&language=ja&query=" + URI.encode_www_form_component(movie_title)
     else

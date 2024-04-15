@@ -1,10 +1,11 @@
 class User::UsersController < ApplicationController
 
-# set_movie呼び出し
-  before_action :set_movie, only: [:show]
-  
   def index
-    @users = User.all
+    if params[:looking_for].present?
+      @users = User.where("name LIKE ?", "%#{params[:looking_for]}%")
+    else
+      @users = User.all
+    end
   end
 
   def show
@@ -48,10 +49,6 @@ class User::UsersController < ApplicationController
   end
 
   private
-
-  def set_movie
-    @movie = Movie.fetch_movie_data(params[:movie_id])
-  end
   
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)

@@ -1,0 +1,19 @@
+<div class="d-inline-flex flex-column">
+  <% review.comments.each do |comment| %>
+    <div class="d-flex">
+      <div class="mb-3">
+        <%= link_to user_path(comment.user) do %>
+          <%= image_tag comment.user.get_profile_image(50,50) %>
+          <%= comment.user.name %>
+        <% end %>
+      </div>
+      <div class="ml-3">
+        <%= comment.created_at.strftime('%Y/%m/%d') %>
+        <%= comment.comment %>
+        <% if comment.user == current_user %>
+          <%= link_to "削除", movie_review_comment_path(review.movie_id, review.id, comment.id), method: :delete, class: "btn btn-sm btn-danger float-end", remote: true %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

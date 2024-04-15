@@ -1,7 +1,7 @@
 <div class='container'>
   <div class='row'>
     <div class='col-5'>
-      <%= render 'user/movies/show', movie: @movie %>
+      <%= render 'user/movies/show', movie: @movie%>
     </div>
     
     <div class='col-6'>
@@ -33,6 +33,11 @@
             <td><%= @review.comment %></td>
           </tr>
           <tr>
+            <td id="comment_counter">
+             <%= render "user/comments/counter", review: @review %>
+           </td>
+          </tr>
+          <tr>
             <% if @review.user == current_user %>
               <td><%= link_to 'Edit', edit_movie_review_path(@review.movie_id, @review.id), class:"btn btn-secondary" %></td>
               <td><%= link_to 'Destroy', @reviews, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
@@ -40,6 +45,11 @@
           </tr>
         </tbody>
       </table>
+
+      <div id="comment_index">
+        <%= render "user/comments/index", review: @review,comment: @comment %><br>
+      </div>
+      <%= render "user/comments/form", review: @review, comment: @comment %>
     </div>
   </div>
 </div>

@@ -28,9 +28,13 @@ Rails.application.routes.draw do
         get "followers" => "relationships#followers", as: "followers"
     end
     resources :movies, only: [:index, :show] do
-      resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy]
+      resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy] do
+        resources :comments, only: [:create, :destroy] 
+      end
       resource :favorite, only: [:create, :destroy]
     end
+    
+    get "search" => "searches#search"
   end
   
   

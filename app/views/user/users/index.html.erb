@@ -1,2 +1,10 @@
+<div class='container'>
+  <div class='row'>
+    <%= form_with(url: users_path, method: :get) do |form| %>
+      <%= form.text_field :looking_for, placeholder: 'User Name..', size: 30 %>
+      <%= form.submit 'search', class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+
   <h2>Users</h2>
-    <%= render 'user/users/index', users: @users %>
+  <%= render 'user/users/index', users: @users %>
