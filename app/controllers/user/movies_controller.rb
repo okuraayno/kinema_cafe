@@ -14,6 +14,7 @@ class User::MoviesController < ApplicationController
     movie_id = params[:id]
     url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
     @movie = JSON.parse(Net::HTTP.get(URI.parse(url)))
+    @reviews = Review.where(movie_id: @movie['id'])
   end
 
 end

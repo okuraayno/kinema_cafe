@@ -22,7 +22,11 @@ Rails.application.routes.draw do
   get "/about" => "user/homes#about"
   
   scope module: :user do
-    resources :users, only: [:index, :show, :edit, :create, :destroy, :update] 
+    resources :users, only: [:index, :show, :edit, :create, :destroy, :update] do
+      resource :relationships, only: [:create, :destroy]
+        get "followings" => "relationships#followings", as: "followings"
+        get "followers" => "relationships#followers", as: "followers"
+    end
     resources :movies, only: [:index, :show] do
       resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy]
       resource :favorite, only: [:create, :destroy]

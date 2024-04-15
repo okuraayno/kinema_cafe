@@ -1,7 +1,7 @@
 class User::ReviewsController < ApplicationController
 
 # set_movie呼び出し
-  before_action :set_movie, only: [:show, :new, :create, :edit, :update]
+  before_action :set_movie, only: [:show, :new, :create, :edit, :update, :destroy]
 
   def show
     @review = Review.find(params[:id])
@@ -39,7 +39,7 @@ class User::ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to movies_path
+    redirect_to movie_path(@movie['id'])
   end
 
   private

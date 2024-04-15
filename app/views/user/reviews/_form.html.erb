@@ -3,20 +3,19 @@
 
   <div id="stars"></div>
   
-  <script>
-    $(document).on('turbolinks:load', function() {
-      let elem = document.querySelector('#stars');
-      if(elem == null) return;
-
-      elem.innerHTML = ""
-      let opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
-        scoreName: 'review[star]',
-      };
-      raty(elem, opt);
-    });
+    <script>
+      $(document).on('turbolinks:load', function() {
+        let elem = document.querySelector('#stars');
+        if(elem == null) return;
+        elem.innerHTML = ""
+        let opt = {
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          starHalf: "<%= asset_path('star-half.png') %>",
+          scoreName: 'review[star]',
+        };
+        raty(elem, opt);
+      });
   </script>
 
   <div class="form-group mb-3">

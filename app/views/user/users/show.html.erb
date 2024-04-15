@@ -15,18 +15,20 @@
           <th class="col-5"><%= @user.introduction %></th>
         </tr>
         <tr>
-          <th class="col-3">follows:</th>
-          <th class="col-3">followers:</th>
+          <th class="col-3">follows: <%= link_to @user.followings.count, user_followings_path(@user) %></th>
+          <th class="col-3">followers: <%= link_to @user.followers.count, user_followers_path(@user) %></th>
         </tr>
       </table>
       <% unless @user.guest_user?%>
-        <% if current_user != @user %>
-          <td></td>
-        <% elsif current_user == @user %>
-          <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-            <i class="fas fa-user-cog"></i>
+        <div class='row'>
+          <% if current_user != @user %>
+            <td><%= render 'user/relationships/btn', user: @user, options: { class: ""}  %></td>
+          <% elsif current_user == @user %>
+            <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+              <i class="fas fa-user-cog"></i>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       <% end %>
     </div>
   </div>
@@ -45,10 +47,10 @@
   
   <div class="tab-content mt-3">
     <div id="movie_reviews" class="tab-pane fade show active">
-      <%= render 'user/reviews/index', reviews: @reviews, movie: @review_movies %>
+      <%= render 'reviews', reviews: @reviews, movie: @review_movies %>
     </div>
     <div id="favorite_movies" class="tab-pane fade">
-      <p><%= render 'user/favorites/index', favorites: @favorites, movie: @favorite_movies %></p>
+      <p><%= render 'favorites', favorites: @favorites, movie: @favorite_movies %></p>
     </div>
     <div id="check_movies" class="tab-pane fade">
       <p>セクション3のコンテンツが表示されます。</p>

@@ -1,0 +1,32 @@
+<% reviews.each do |review| %>
+  <div class='d-flex flex-row mb-2'>
+    <div class='mr-2'>
+      <%= link_to user_path(review.user.id) do %>
+        <%=image_tag review.user.get_profile_image(100,100) %></br>
+        <%= review.user.name %>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to movie_review_path(review.movie_id, review.id) do %>
+        <%= review.title %>
+      <% end %>
+      <div id="star_<%= review.id %>"></div>
+        <script>
+          $(document).on('turbolinks:load', function() {
+            let elem = document.querySelector('#star_<%= review.id %>');
+            if (elem == null) return;
+            elem.innerHTML = "";
+            let opt = {
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              score: "<%= review.star %>",
+              readOnly: true,
+            };
+            raty(elem, opt);
+          });
+        </script>
+      <%= review.comment %>
+    <% end %>
+  </div>
+</div>
