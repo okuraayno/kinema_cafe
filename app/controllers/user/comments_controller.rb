@@ -8,6 +8,7 @@ class User::CommentsController < ApplicationController
   end
 
   def destroy
+    @review = Review.find(params[:review_id])
     Comment.find(params[:id]).destroy
   end
 
@@ -16,5 +17,4 @@ private
   def comment_params
     params.require(:comment).permit(:comment)
   end
-
 end
