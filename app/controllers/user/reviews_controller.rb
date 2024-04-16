@@ -9,21 +9,30 @@ class User::ReviewsController < ApplicationController
   end
 
   def new
-    @review = Review.new
+    if Review.exists?(user_id: current_user.id, movie_id: @movie['id'])
+      redirect_to edit_movie_review_path(@movie['id'], current_user.reviews.find_by(movie_id: @movie['id']).id)
+    else
+      @review = Review.new
+    end
   end
 
   def create
-    review = Review.new(review_params)
-    review.user_id = current_user.id
-    if review.save
-      redirect_to movie_path(@movie['id']), notice: "You have created book successfully."
+    if Review.exists?(user_id: current_user.id, movie_id: @movie['id'])
+      redirect_to edit_movie_review_path(@movie['id'], current_user.reviews.find_by(movie_id: @movie['id']).id)
     else
-      render 'new'
+      review = Review.new(review_params)
+      review.user_id = current_user.id
+      if review.save
+        redirect_to movie_path(@movie['id'])
+      else
+        render 'new'
+      end
     end
   end
   
   def edit
     @review = Review.find(params[:id])
+    @rating = @review.star
   end
 
   # ローカル変数にする
@@ -50,7 +59,7 @@ class User::ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:user_id, :movie_id, :title, :comment, :star)
+    params.require(:review).permit(:user_id, :movie_id, :title, :comment, :star, :spoiler)
   end
 
 end
