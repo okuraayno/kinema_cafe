@@ -29,7 +29,7 @@
         </tr>
         <tr>
           <th class="col-3">
-            <%= form_with model: @user, url: admin_member_path(@member), method: :patch do |f| %>
+            <%= form_with model: @user, url: admin_member_path, method: :patch do |f| %>
               <div class="form-check form-check-inline">
                 <%= f.radio_button :is_active, true, class: "form-check-input"  %>
                 <%= f.label :"有効", class: "form-check-label mr-3" %>
@@ -40,7 +40,7 @@
               </div>
             </th>
             <th class="col-5">
-              <%= f.submit "会員ステータスの変更を保存", class: "btn btn-success" %>
+              <%= f.submit "会員ステータスの変更を保存", class: "btn btn-success"%>
             </th>
           <% end %>
         </tr>

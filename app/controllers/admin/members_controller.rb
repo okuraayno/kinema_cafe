@@ -12,4 +12,10 @@ class Admin::MembersController < ApplicationController
     @member = User.find(params[:id])
   end
   
+  private
+  
+  def user_params
+    params.require(:user).permit(:user_id, :is_active)
+  end
+  
 end

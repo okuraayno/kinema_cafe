@@ -1,18 +1,35 @@
 <table class='table'>
   <tr>
     <% if movie['poster_path'] %>
-      <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: '200x300', style: "max-width: 100%;" %>
+      <td>
+        <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: '200x300', style: "max-width: 100%;" %>
+      </td>
     <% else %>
-      <%= image_tag 'no_image_tate.jpg', size: '200x300', style: "max-width: 100%;" %>
+      <td>
+        <%= image_tag 'no_image_tate.jpg', size: '200x300', style: "max-width: 100%;" %>
+      </td>
     <% end %>
+    <th style="text-align: left;">
+      <%= movie['title'] %>
+      <br>
+      公開日:
+      <%= Date.parse(movie['release_date']).strftime("%Y/%m/%d") %>上映
+      <br>
+      平均評価:
+      <%= average_score %>/5点
+      <br>
+      <div class="d-flex flex-row mb-2">
+        <div class="p-2" id="favorite_btn_<%= @movie['id'] %>">
+          <%= render 'user/favorites/btn', movie: @movie%>
+        </div>
+        <div class="p-2">
+          <%= link_to "review", new_movie_review_path(movie_id: @movie['id']), class:"btn btn-secondary" %></div>
+      </div>
+    </th>
   </tr>
   <tr>
-    <th><%= movie['title'] %></th>
-  </tr>
-  <tr>
-    <th>平均値入れる</th>
-  </tr>
-  <tr>
-    <th><%= movie['overview'] %></th>
+    <td colspan="2">
+      <%= movie['overview'] %>
+    </td>
   </tr>
 </table>

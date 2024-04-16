@@ -1,17 +1,10 @@
 <div class='container'>
   <div class='row'>
-    <div class='col-5'>
-      <%= render 'show', movie: @movie %>
+    <div class='col-6'>
+      <%= render 'show', movie: @movie, average_score: @average_score %>
     </div>
 
     <div class='col-6'>
-      <div class="d-flex flex-row mb-2">
-        <div class="p-2" id="favorite_btn_<%= @movie['id'] %>">
-          <%= render 'user/favorites/btn', movie: @movie%>
-        </div>
-        <div class="p-2">
-          <%= link_to "review", new_movie_review_path(movie_id: @movie['id']), class:"btn btn-secondary" %></div>
-      </div>
       <div class='mb-4'>
         <h4><i class="fa-solid fa-feather"></i> スコア・レビュー</h4>
       </div>
