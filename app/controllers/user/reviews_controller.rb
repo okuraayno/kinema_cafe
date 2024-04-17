@@ -1,11 +1,13 @@
 class User::ReviewsController < ApplicationController
 
-# set_movie呼び出し
   before_action :set_movie, only: [:show, :new, :create, :edit, :update, :destroy]
+  before_action :set_movie_genre_names, only: [:show, :new, :edit, :destroy]
 
   def show
     @review = Review.find(params[:id])
     @comment = Comment.new
+    @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
+
   end
 
   def new
@@ -14,6 +16,7 @@ class User::ReviewsController < ApplicationController
     else
       @review = Review.new
     end
+    @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
   end
 
   def create
@@ -33,6 +36,7 @@ class User::ReviewsController < ApplicationController
   def edit
     @review = Review.find(params[:id])
     @rating = @review.star
+    @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
   end
 
   # ローカル変数にする
@@ -45,7 +49,6 @@ class User::ReviewsController < ApplicationController
     end
   end
   
-  # ローカル変数にする
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
@@ -56,6 +59,10 @@ class User::ReviewsController < ApplicationController
 
   def set_movie
     @movie = Movie.fetch_movie_data(params[:movie_id])
+  end
+  
+  def set_movie_genre_names
+    @movie_genre_names = Movie.fetch_genre_names(params[:movie_id])
   end
 
   def review_params

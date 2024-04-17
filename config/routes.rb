@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'homes#top'
     resources :members, only: [:index, :show]
-    resources :reviews, only: [:index, :show]
+    resources :reviews, only: [:index, :show, :destroy] do
+      resources :comments, only: [:destroy]
+    end
   end
 
 # ユーザー側

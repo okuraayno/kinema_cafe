@@ -1,7 +1,7 @@
 <div class='container'>
   <div class='row'>
     <div class='col-6'>
-      <%= render 'user/movies/show', movie: @movie, average_score: @average_score %>
+      <%= render 'user/movies/show', movie: @movie, average_score: @average_score, movie_genre_names: @movie_genre_names %>
     </div>
     
     <div class='col-6'>
@@ -58,7 +58,7 @@
       </table>
 
       <div id="comment_index">
-        <%= render "user/comments/index", review: @review,comment: @comment %><br>
+        <%= render "user/comments/index", review: @review, comment: @comment %><br>
       </div>
       <%= render "user/comments/form", review: @review, comment: @comment %>
     </div>

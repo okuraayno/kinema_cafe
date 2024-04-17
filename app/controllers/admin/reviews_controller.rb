@@ -15,6 +15,12 @@ class Admin::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
   end
 
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to admin_reviews_path
+
+  end
 
   def set_movie
     @movie = Movie.fetch_movie_data(params[:movie_id])
