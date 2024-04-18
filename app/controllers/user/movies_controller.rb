@@ -1,4 +1,5 @@
 class User::MoviesController < ApplicationController
+
   def index
     if params[:looking_for].present?
       movie_title = params[:looking_for]
@@ -10,8 +11,8 @@ class User::MoviesController < ApplicationController
   end
 
   def show
-    @movie = fetch_movie_data(params[:id])
-    @movie_genre_names = fetch_genre_names(params[:id])
+    @movie = Movie.fetch_movie_data(params[:id]) # ここで@movieをセットする
+    @movie_genre_names = Movie.fetch_genre_names(params[:id])
     @reviews = Review.where(movie_id: @movie['id'])
     @average_score = @reviews.average(:star).to_f.round(1)
   end
@@ -44,12 +45,12 @@ class User::MoviesController < ApplicationController
     movies
   end
 
-  def fetch_movie_data(movie_id)
-    Movie.fetch_movie_data(movie_id)
+  def set_movie
+    @movie = Movie.fetch_movie_data(params[:id]) # params[:id]を使用する
   end
 
-  def fetch_genre_names(movie_id)
-    Movie.fetch_genre_names(movie_id)
+  def set_movie_genre_names
+    @movie_genre_names = Movie.fetch_genre_names(params[:id]) # params[:id]を使用する
   end
   
 end

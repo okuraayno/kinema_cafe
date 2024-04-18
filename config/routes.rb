@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'homes#top'
-    resources :members, only: [:index, :show]
+    resources :members, only: [:index, :show, :update]
     resources :reviews, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]
     end

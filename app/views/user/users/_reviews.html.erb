@@ -1,10 +1,11 @@
-<% reviews.each_with_index do |review, index| %>
+<% reviews.each do |review| %>
   <table class='my-4 mx-3'>
     <thead>
       <tr>
         <th><i class="fa-solid fa-feather"></i>
-          <%= link_to movie_path(movie[index]['id']) do %>
-            <%= movie[index]['title'] %>
+        <% movie_data = Movie.fetch_movie_data(review.movie_id) %>
+          <%= link_to movie_path(review.movie_id) do %>
+            <%= movie_data['title'] %>
           <% end %>へのレビュー
         </th>
       </tr>

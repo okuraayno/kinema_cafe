@@ -5,7 +5,7 @@ class Admin::ReviewsController < ApplicationController
 
   def index
     if params[:looking_for].present?
-      @reviews = Review.where("name LIKE ?", "%#{params[:looking_for]}%")
+      @reviews = Review.where("comment LIKE ?", "%#{params[:looking_for]}%")
     else
       @reviews = Review.all
     end
@@ -18,7 +18,7 @@ class Admin::ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to admin_reviews_path
+    redirect_to admin_member_path(@user)
 
   end
 

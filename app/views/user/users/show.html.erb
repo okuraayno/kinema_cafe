@@ -47,10 +47,10 @@
   
   <div class="tab-content mt-3">
     <div id="movie_reviews" class="tab-pane fade show active">
-      <%= render 'reviews', reviews: @reviews, movie: @review_movies %>
+      <%= render 'reviews', reviews: @reviews %>
     </div>
     <div id="favorite_movies" class="tab-pane fade">
-      <p><%= render 'favorites', favorites: @favorites, movie: @favorite_movies %></p>
+      <p><%= render 'favorites', favorites: @favorites, movie: @movie %></p>
     </div>
     <div id="check_movies" class="tab-pane fade">
       <p>セクション3のコンテンツが表示されます。</p>
