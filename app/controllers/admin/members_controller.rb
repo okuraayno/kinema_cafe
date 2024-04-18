@@ -10,6 +10,13 @@ class Admin::MembersController < ApplicationController
 
   def show
     @member = User.find(params[:id])
+    @reviews = @member.reviews
+  end
+  
+  def update
+    @member =  User.find(params[:id])
+    @member.update(user_params)
+    redirect_back(fallback_location: root_path)
   end
   
   private

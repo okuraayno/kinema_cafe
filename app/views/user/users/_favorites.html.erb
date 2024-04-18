@@ -1,14 +1,15 @@
-<% favorites.each_with_index do |favorite, index| %>
+<% favorites.each do |favorite| %>
   <table class='my-4 mx-3'>
     <tr>
       <td>
-        <%= link_to movie_path(movie[index]['id']) do %>
-          <% if movie[index]['poster_path'] %>
-            <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie[index]['poster_path'], size: '50x80', style: "max-width: 100%;" %>
+        <% movie_data = Movie.fetch_movie_data(favorite.movie_id) %>
+        <%= link_to movie_path(favorite.movie_id) do %>
+          <% if movie_data['poster_path'] %>
+            <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie_data['poster_path'], size: '50x80', style: "max-width: 100%;" %>
           <% else %>
             <%= image_tag 'no_image_tate.jpg', size: '50x80', style: "max-width: 100%;" %>
           <% end %>
-          <%= movie[index]['title'] %>
+          <%= movie_data['title'] %>
         <% end %>
       </td>
     </tr>
