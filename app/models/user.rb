@@ -11,7 +11,6 @@ class User < ApplicationRecord
 
 # ゲストログイン用
   GUEST_USER_EMAIL = "guest@example.com"
-
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -44,6 +43,35 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+
+#ユーザーステータスが有効or利用停止である場合のユーザーログインについて
+  def user_status
+    if is_active == false
+      "利用停止"
+    else
+      "有効"
+    end
+  end
+  
+  def active_for_authentication?
+    super && (is_active == true)
+  end
+
+
+# ユーザー検索
+  def self.search_for(content, method)
+    if method == 'perfect'
+      User.where(name: content)
+    elsif method == 'forward'
+      User.where('name LIKE ?', content + '%')
+    elsif method == 'backward'
+      User.where('name LIKE ?', '%' + content)
+    else
+      User.where('name LIKE ?', '%' + content + '%')
+    end
+  end
+
 
 # 画像の取得
   has_one_attached :profile_image

@@ -3,10 +3,10 @@ class User::UsersController < ApplicationController
   before_action :set_movie, only: [:show]
 
   def index
-    if params[:looking_for].present?
-      @users = User.where("name LIKE ?", "%#{params[:looking_for]}%")
+    if params[:content].blank?  # 検索フォームが空の場合
+      @users = User.all  # ユーザー全件を取得
     else
-      @users = User.all
+      @users = User.search_for(params[:content], params[:method])  # 検索結果を取得
     end
   end
 

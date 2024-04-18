@@ -1,6 +1,5 @@
 class Admin::ReviewsController < ApplicationController
-
-# set_movie呼び出し
+  before_action :authenticate_admin!
   before_action :set_movie, only: [:index, :show]
 
   def index
