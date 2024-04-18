@@ -8,6 +8,11 @@ class User::MoviesController < ApplicationController
       movies = fetch_now_playing_movies
     end
     @movies = Kaminari.paginate_array(movies).page(params[:page]).per(20)
+    @movies.each do |movie|
+      reviews = Review.where(movie_id: movie['id'])
+      average_score = reviews.average(:star).to_f.round(1)
+      movie['average_score'] = average_score # 各ムービーに評価平均値を追加
+    end
   end
 
   def show

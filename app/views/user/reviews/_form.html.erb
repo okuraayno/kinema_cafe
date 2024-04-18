@@ -2,22 +2,20 @@
   <%= f.hidden_field :movie_id, value: @movie['id'] %>
 
   <div id='stars', class='mb-3'></div>
-  
-    <script>
-      $(document).on('turbolinks:load', function() {
-        let elem = document.querySelector('#stars');
-        if(elem == null) return;
-        elem.innerHTML = ""
-        let opt = {
-          starOn: "<%= asset_path('star-on.png') %>",
-          starOff: "<%= asset_path('star-off.png') %>",
-          starHalf: "<%= asset_path('star-half.png') %>",
-          scoreName: 'review[star]',
-          half: true, 
-          score: "<%= @rating || 0 %>",
-        };
-        raty(elem, opt);
-      });
+  <script>
+    $(document).on('turbolinks:load', function() {
+      let elem = document.querySelector('#stars');
+      if(elem == null) return;
+      let opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        scoreName: 'review[star]',
+        half: true,
+        score: "<%= @rating || 0 %>",
+      };
+      raty(elem, opt);
+    });
   </script>
 
   <div class='form-group mb-3'>
@@ -32,6 +30,6 @@
     <%= f.radio_button :spoiler, true %>
     <%= f.label :"ネタバレあり" , class: "col-form-label" %>
   </div>
-  
+
   <%= f.submit class: 'btn btn-secondary' %>
 <% end %>

@@ -10,24 +10,24 @@
       <%= link_to movie_review_path(review.movie_id, review.id) do %>
         <%= review.title %>
       <% end %>
-      <div id='star_<%= review.id %>'></div>
-      <div class="eval-star"><%= review.star %>/5点</div>
-        <script>
-          $(document).on('turbolinks:load', function() {
-            let elem = document.querySelector('#star_<%= review.id %>');
-            if (elem == null) return;
-            elem.innerHTML = "";
-            let opt = {
-              starOn: "<%= asset_path('star-on.png') %>",
-              starOff: "<%= asset_path('star-off.png') %>",
-              starHalf: "<%= asset_path('star-half.png') %>",
-              score: "<%= review.star %>",
-              half: true,
-              readOnly: true,
-            };
-            raty(elem, opt);
-          });
-        </script>
+      <div id='eval_star_<%= review.id %>'></div>
+      <div class="eval_star"><%= review.star %>/5点</div>
+      <script>
+        $(document).on('turbolinks:load', function() {
+          let elem = document.querySelector('#eval_star_<%= review.id %>');
+          if (elem == null || elem.classList.contains('raty-initialized')) return;
+          let opt = {
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            score: "<%= review.star %>",
+            half: true,
+            readOnly: true,
+          };
+          raty(elem, opt);
+          elem.classList.add('raty-initialized');
+        });
+      </script>
       <% if review.spoiler == true %>
         <a role="button" data-toggle="collapse" href="#example1" aria-expanded="false" aria-controls="example1">
           <i class="fa-solid fa-triangle-exclamation"></i> ネタバレを表示する

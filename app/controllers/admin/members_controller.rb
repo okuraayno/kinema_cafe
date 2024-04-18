@@ -2,10 +2,10 @@ class Admin::MembersController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    if params[:looking_for].present?
-      @members = User.where("name LIKE ?", "%#{params[:looking_for]}%")
-    else
+    if params[:content].blank?
       @members = User.all
+    else
+      @members = User.search_for(params[:content], params[:method])  # 検索結果を取得
     end
   end
 

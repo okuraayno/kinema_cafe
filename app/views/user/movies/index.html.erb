@@ -19,7 +19,28 @@
           <% end %>
         </div>
         <div class='card-body'>
-          <p class='item-details item-name card-text'><%= movie['title'] %></p>
+          <div class="average_stars" data-score="<%= movie['average_score'] || 0 %>"></div>
+          <div class="average_star"><%= movie['average_score'] || 0 %>/5点</div>
+          <script>
+            $(document).on('turbolinks:load', function() {
+              let elements = document.querySelectorAll('.average_stars');
+              elements.forEach(function(element) {
+                let score = element.dataset.score;
+                if(element == null) return;
+                element.innerHTML = "";
+                let opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  scoreName: 'review[star]',
+                  half: true, 
+                  readOnly: true,
+                  score: score || 0,
+                };
+                raty(element, opt);
+              });
+            });
+          </script>
         </div>
       </div>
     <% end %>

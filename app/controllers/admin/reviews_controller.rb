@@ -3,10 +3,10 @@ class Admin::ReviewsController < ApplicationController
   before_action :set_movie, only: [:index, :show]
 
   def index
-    if params[:looking_for].present?
-      @reviews = Review.where("comment LIKE ?", "%#{params[:looking_for]}%")
-    else
+    if params[:content].blank?
       @reviews = Review.all
+    else
+      @reviews = Review.search_for(params[:content], params[:method])  # 検索結果を取得
     end
   end
 
@@ -17,7 +17,7 @@ class Admin::ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to admin_member_path(@user)
+    redirect_to admin_reviews_path
 
   end
 

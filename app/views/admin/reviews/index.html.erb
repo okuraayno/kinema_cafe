@@ -1,9 +1,6 @@
 <h2>レビュー一覧</h2>
 <div class='container'>
   <div class='row'>
-    <%= form_with(url: admin_reviews_path, method: :get) do |form| %>
-      <%= form.text_field :looking_for, placeholder: 'レビュー内容..', size: 30 %>
-      <%= form.submit 'search', class: 'btn btn-secondary' %>
-    <% end %>
+    <%= render 'admin/searches/form' %>
   </div>
 <%= render 'admin/reviews/index', reviews: @reviews %>
