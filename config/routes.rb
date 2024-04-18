@@ -39,7 +39,6 @@ Rails.application.routes.draw do
       end
       resource :favorite, only: [:create, :destroy]
     end
-
     get "search" => "searches#search"
   end
 
