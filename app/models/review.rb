@@ -20,5 +20,10 @@ class Review < ApplicationRecord
       Review.where('title LIKE ?', '%' + content + '%')
     end
   end
-  
+
+
+# ソート機能
+  scope :latest, -> {order(created_at: :desc)}
+  scope :star_count, -> {order(star: :desc)}
+
 end

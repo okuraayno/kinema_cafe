@@ -1,6 +1,6 @@
 <div class='container'>
   <div class='row'>
-    <div class='col-6'>
+    <div class='col-5'>
       <%= render 'show', movie: @movie, average_score: @average_score, movie_genre_names: @movie_genre_names %>
     </div>
 
@@ -13,7 +13,7 @@
           <%= link_to "review", new_movie_review_path(movie_id: @movie['id']), class:"btn btn-secondary" %>
         </div>
       </div>
-      <div class='mb-4'>
+      <div class="mb-6">
         <h4><i class="fa-solid fa-feather"></i> スコア・レビュー</h4>
       </div>
       <div>

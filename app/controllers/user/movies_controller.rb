@@ -16,9 +16,14 @@ class User::MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.fetch_movie_data(params[:id]) # ここで@movieをセットする
+    @movie = Movie.fetch_movie_data(params[:id])
     @movie_genre_names = Movie.fetch_genre_names(params[:id])
-    @reviews = Review.where(movie_id: @movie['id'])
+      @reviews = Review.where(movie_id: @movie['id'])
+        if params[:latest]
+          @reviews = @reviews.latest
+        elsif params[:star_count]
+          @reviews = @reviews.star_count
+        end
     @average_score = @reviews.average(:star).to_f.round(1)
   end
 

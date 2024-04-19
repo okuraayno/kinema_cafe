@@ -8,6 +8,7 @@ class User::UsersController < ApplicationController
     else
       @users = User.search_for(params[:content], params[:method])  # 検索結果を取得
     end
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
   end
 
   def show

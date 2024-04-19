@@ -1,3 +1,9 @@
+<div class="my-3">
+  <%= link_to '新着順', movie_path(latest: "true") %>
+  <span>|</span>
+  <%= link_to '評価の高い順', movie_path(star_count: "true") %>
+</div>
+
 <% reviews.each do |review| %>
   <div class='d-flex flex-row mb-5'>
     <div class='mr-2'>
@@ -28,6 +34,7 @@
           elem.classList.add('raty-initialized');
         });
       </script>
+      <div style="max-width: 400px;">
       <% if review.spoiler == true %>
         <a role="button" data-toggle="collapse" href="#example1" aria-expanded="false" aria-controls="example1">
           <i class="fa-solid fa-triangle-exclamation"></i> ネタバレを表示する
@@ -38,6 +45,7 @@
       <% else %>
         <%= review.comment %>
       <% end %>
+      </div>
     </div>
   </div>
 <% end %>

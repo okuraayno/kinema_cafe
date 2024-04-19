@@ -1,20 +1,23 @@
-<table class='table'>
+<table class='table' style="max-width: 400px;">
   <tr>
     <% if movie['poster_path'] %>
       <td>
-        <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: '200x300', style: "max-width: 100%;" %>
+          <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: '200x250', style: "max-width: 100%;" %>
       </td>
     <% else %>
       <td>
-        <%= image_tag 'no_image_tate.jpg', size: '200x300', style: "max-width: 100%;" %>
+        <div class="Regular shadow">
+          <%= image_tag 'no_image_tate.jpg', size: '200x300', style: "max-width: 100%;" %>
+        </div>
       </td>
     <% end %>
     <th style="text-align: left;">
-      <%= movie['title'] %>
+      <h5><b><%= movie['title'] %></b></h5>
       <br>
       公開日:
       <br>
-      <%= Date.parse(@movie['release_date']).strftime("%Y/%m/%d") %>上映
+      <%= Date.parse(@movie['release_date']).strftime("%Y/%m/%d") %>
+      <br>
       <br>
       平均評価:
       <br>

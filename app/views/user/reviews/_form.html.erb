@@ -1,20 +1,21 @@
 <%= form_with model: review, url: (review.persisted? ? movie_review_path(review.movie_id, review.id) : movie_reviews_path), local: true do |f| %>
   <%= f.hidden_field :movie_id, value: @movie['id'] %>
 
-  <div id='stars', class='mb-3'></div>
+  <div id='stars'></div>
   <script>
     $(document).on('turbolinks:load', function() {
       let elem = document.querySelector('#stars');
-      if(elem == null) return;
-      let opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
-        scoreName: 'review[star]',
-        half: true,
-        score: "<%= @rating || 0 %>",
-      };
-      raty(elem, opt);
+      if (elem && elem.children.length === 0) {
+        let opt = {
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          starHalf: "<%= asset_path('star-half.png') %>",
+          scoreName: 'review[star]',
+          half: true,
+          score: "<%= @rating || 0 %>",
+        };
+        raty(elem, opt);
+      }
     });
   </script>
 
