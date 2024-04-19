@@ -10,7 +10,6 @@
         </th>
       </tr>
     </thead>
-    
     <tbody>
       <tr>
         <th>
@@ -40,16 +39,50 @@
       <tr>
         <td>
           <% if review.spoiler == true %>
-          <a role="button" data-toggle="collapse" href="#example1" aria-expanded="false" aria-controls="example1">
-            <i class="fa-solid fa-triangle-exclamation"></i> ネタバレを表示する
-          </a>
-          <div class="collapse" id="example1">
-            <%= review.comment %>
-          </div>
-        <% else %>
-          <%= review.comment %>
-        <% end %>
-      </td>
+            <a role="button" data-toggle="collapse" href="#example1" aria-expanded="false" aria-controls="example1">
+              <i class="fa-solid fa-triangle-exclamation"></i> ネタバレを表示する
+            </a>
+            <div class="collapse" id="example1">
+              <div>
+                <%= review.comment %>
+              </div>
+              <% if review.tag1.present? %>
+                <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
+                  <%= review.tag1 %>
+                </div>
+              <% end %>
+              <% if review.tag2.present? %>
+                <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
+                  <%= review.tag2 %>
+                </div>
+              <% end %>
+              <% if review.tag3.present? %>
+                <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
+                  <%= review.tag3 %>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <div>
+              <%= review.comment %>
+            </div>
+            <% if review.tag1.present? %>
+              <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
+                <%= review.tag1 %>
+              </div>
+            <% end %>
+            <% if review.tag2.present? %>
+              <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
+                <%= review.tag2 %>
+              </div>
+            <% end %>
+            <% if review.tag3.present? %>
+              <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
+                <%= review.tag3 %>
+              </div>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     </tbody>
   </table>

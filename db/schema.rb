@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_16_084744) do
+ActiveRecord::Schema.define(version: 2024_04_19_144959) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -96,6 +96,9 @@ ActiveRecord::Schema.define(version: 2024_04_16_084744) do
     t.integer "movie_id"
     t.integer "user_id"
     t.boolean "spoiler", default: false, null: false
+    t.string "tag1"
+    t.string "tag2"
+    t.string "tag3"
   end
 
   create_table "users", force: :cascade do |t|
