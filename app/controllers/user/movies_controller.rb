@@ -13,7 +13,9 @@ class User::MoviesController < ApplicationController
       average_score = reviews.average(:star).to_f.round(1)
       movie['average_score'] = average_score # 各ムービーに評価平均値を追加
     end
-    @tags = Review.where.not(tag: [nil, ""]).pluck(:tag).uniq
+    tag_count = Review.where.not(tag: [nil, ""]).group(:tag).count # nilまたは""のタグを排除し、各タグが何件あるかを集計
+    sorted_tags = tag_count.sort_by { |_, count| -count } # それぞれのタグが何件あるか降順でソート
+    @tags = sorted_tags.first(10).map(&:first) # 上位10件のタグのみを抽出し、最初の要素(タグ名)のみを取得
   end
 
   def show
