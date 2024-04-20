@@ -13,6 +13,7 @@ class User::MoviesController < ApplicationController
       average_score = reviews.average(:star).to_f.round(1)
       movie['average_score'] = average_score # 各ムービーに評価平均値を追加
     end
+    @tags = Review.where.not(tag: [nil, ""]).pluck(:tag).uniq
   end
 
   def show
@@ -56,11 +57,11 @@ class User::MoviesController < ApplicationController
   end
 
   def set_movie
-    @movie = Movie.fetch_movie_data(params[:id]) # params[:id]を使用する
+    @movie = Movie.fetch_movie_data(params[:id]) 
   end
 
   def set_movie_genre_names
-    @movie_genre_names = Movie.fetch_genre_names(params[:id]) # params[:id]を使用する
+    @movie_genre_names = Movie.fetch_genre_names(params[:id]) 
   end
   
 end

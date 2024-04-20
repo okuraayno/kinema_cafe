@@ -39,19 +39,9 @@
                   <div>
                     <%= @review.comment %>
                   </div>
-                  <% if @review.tag1.present? %>
+                  <% if @review.tag.present? %>
                     <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-                      <%= @review.tag1 %>
-                    </div>
-                  <% end %>
-                  <% if @review.tag2.present? %>
-                    <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-                      <%= @review.tag2 %>
-                    </div>
-                   <% end %>
-                   <% if @review.tag3.present? %>
-                    <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-                      <%= @review.tag3 %>
+                      <%= @review.tag %>
                     </div>
                   <% end %>
                 </div>
@@ -59,19 +49,9 @@
                 <div>
                   <%= @review.comment %>
                 </div>
-                <% if @review.tag1.present? %>
+                <% if @review.tag.present? %>
                   <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-                    <%= @review.tag1 %>
-                  </div>
-                <% end %>
-                <% if @review.tag2.present? %>
-                  <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-                    <%= @review.tag2 %>
-                  </div>
-                 <% end %>
-                 <% if @review.tag3.present? %>
-                  <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-                    <%= @review.tag3 %>
+                    <%= @review.tag %>
                   </div>
                 <% end %>
               <% end %>

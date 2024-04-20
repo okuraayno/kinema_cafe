@@ -1,13 +1,11 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
-
 
 # ゲストログイン用
   GUEST_USER_EMAIL = "guest@example.com"
@@ -21,7 +19,6 @@ class User < ApplicationRecord
   def guest_user?
     email == GUEST_USER_EMAIL
   end
-
 
 # フォローしている関連付け
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -44,7 +41,6 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-
 #ユーザーステータスが有効or利用停止である場合のユーザーログインについて
   def user_status
     if is_active == false
@@ -58,7 +54,6 @@ class User < ApplicationRecord
     super && (is_active == true)
   end
 
-
 # ユーザー検索
   def self.search_for(content, method)
     if method == 'perfect'
@@ -71,7 +66,6 @@ class User < ApplicationRecord
       User.where('name LIKE ?', '%' + content + '%')
     end
   end
-
 
 # 画像の取得
   has_one_attached :profile_image

@@ -14,6 +14,7 @@ class User::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @reviews = @user.reviews
+    pp @reviews
     @favorites = @user.favorites
   end
   
@@ -26,6 +27,7 @@ class User::UsersController < ApplicationController
     is_matching_login_user
     @user = User.find(params[:id])
     if @user.update(user_params)
+      flash[:notice] = "You have updated user successfully."
       redirect_to user_path(@user)
     else
       render :edit

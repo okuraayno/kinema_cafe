@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       end
       resource :favorite, only: [:create, :destroy]
     end
+    get "tags" => "tags#search"
   end
 
 

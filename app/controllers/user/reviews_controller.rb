@@ -6,7 +6,7 @@ class User::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @comment = Comment.new
-    @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
+    @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)  
 
   end
 
@@ -26,13 +26,14 @@ class User::ReviewsController < ApplicationController
       review = Review.new(review_params)
       review.user_id = current_user.id
       if review.save
+        flash[:notice] = "You have created review successfully."
         redirect_to movie_path(@movie['id'])
       else
         render 'new'
       end
     end
   end
-  
+
   def edit
     @review = Review.find(params[:id])
     @rating = @review.star
@@ -45,10 +46,10 @@ class User::ReviewsController < ApplicationController
     if @review.update(review_params)
       redirect_to movie_path(@movie['id'])
     else
-      render "edit" 
+      render "edit"
     end
   end
-  
+
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
@@ -57,16 +58,17 @@ class User::ReviewsController < ApplicationController
 
   private
 
+# 特定の映画データを取得
   def set_movie
     @movie = Movie.fetch_movie_data(params[:movie_id])
   end
-  
+
   def set_movie_genre_names
     @movie_genre_names = Movie.fetch_genre_names(params[:movie_id])
   end
 
   def review_params
-    params.require(:review).permit(:user_id, :movie_id, :title, :comment, :star, :spoiler, :tag, :tag2, :tag3 )
+    params.require(:review).permit(:user_id, :movie_id, :title, :comment, :star, :spoiler, :tag)
   end
 
 end

@@ -5,7 +5,7 @@ class Admin::MembersController < ApplicationController
     if params[:content].blank?
       @members = User.all
     else
-      @members = User.search_for(params[:content], params[:method])  # 検索結果を取得
+      @members = User.search_for(params[:content], params[:method])
     end
   end
 
@@ -17,6 +17,7 @@ class Admin::MembersController < ApplicationController
   def update
     @member =  User.find(params[:id])
     @member.update(user_params)
+    flash[:notice] = "会員ステータスを変更しました"
     redirect_back(fallback_location: root_path)
   end
   

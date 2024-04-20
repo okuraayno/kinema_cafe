@@ -1,16 +1,21 @@
-<div class="my-3">
-  <%= link_to '新着順', movie_path(latest: "true") %>
-  <span>|</span>
-  <%= link_to '評価の高い順', movie_path(star_count: "true") %>
-</div>
-
 <% reviews.each do |review| %>
   <div class='d-flex flex-row mb-5'>
     <div class='mr-2'>
+    <% if controller_name == 'movies' %>
       <%= link_to user_path(review.user.id) do %>
         <%=image_tag review.user.get_profile_image(50,50) %></br>
         <%= review.user.name %>
       <% end %>
+    <% else %>
+      <% movie_data = Movie.fetch_movie_data(review.movie_id) %>
+      <%= link_to movie_path(review.movie_id) do %>
+        <% if movie_data['poster_path'] %>
+          <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie_data['poster_path'], size: '50x80', style: 'max-width: 100%;' %>
+        <% else %>
+          <%= image_tag 'no_image_tate.jpg', size: '50x80', style: "max-width: 100%;" %>
+        <% end %>
+      <% end %>
+    <% end %>
     </div>
     <div>
       <%= link_to movie_review_path(review.movie_id, review.id) do %>
@@ -43,19 +48,9 @@
           <div>
             <%= review.comment %>
           </div>
-          <% if review.tag1.present? %>
+          <% if review.tag.present? %>
             <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-              <%= review.tag1 %>
-            </div>
-          <% end %>
-          <% if review.tag2.present? %>
-            <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-              <%= review.tag2 %>
-            </div>
-          <% end %>
-          <% if review.tag3.present? %>
-            <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-              <%= review.tag3 %>
+              <%= review.tag %>
             </div>
           <% end %>
         </div>
@@ -63,19 +58,9 @@
         <div>
           <%= review.comment %>
         </div>
-        <% if review.tag1.present? %>
+        <% if review.tag.present? %>
           <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-            <%= review.tag1 %>
-          </div>
-        <% end %>
-        <% if review.tag2.present? %>
-          <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-            <%= review.tag2 %>
-          </div>
-        <% end %>
-        <% if review.tag3.present? %>
-          <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-            <%= review.tag3 %>
+            <%= review.tag %>
           </div>
         <% end %>
       <% end %>

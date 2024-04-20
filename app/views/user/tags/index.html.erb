@@ -1,0 +1,18 @@
+<div class='container'>
+  <h3>レビュータグ"<%= @content %>"がつけられた映画一覧</h3>
+  <div class='row my-5'>
+    <% @movies.each do |movie_data| %>
+      <div class='col-12 col-sm-6 col-md-4 col-lg-3'>
+        <div class='card bg-transparent border-0' style='width: 100%;'>
+          <%= link_to movie_path(movie_data['id']) do %>
+            <% if movie_data['poster_path'] %>
+              <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie_data['poster_path'], size: '200x300', style: 'max-width: 100%;' %>
+            <% else %>
+              <%= image_tag 'no_image_tate.jpg', size: '200x300', style: "max-width: 100%;" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
