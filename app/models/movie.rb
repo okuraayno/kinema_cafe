@@ -1,12 +1,12 @@
 class Movie < ApplicationRecord
 
-# APIからの映画データ取得
+# 特定の映画データを取得
   def self.fetch_movie_data(movie_id)
     url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
     JSON.parse(Net::HTTP.get(URI.parse(url)))
   end
 
-# ジャンル名取得
+# 特定の映画のジャンルを取得
   def self.fetch_genre_names(movie_id)
     movie_url = "https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{ENV['TMDB_API_KEY']}&language=ja"
     genre_url = "https://api.themoviedb.org/3/genre/movie/list?api_key=#{ENV['TMDB_API_KEY']}&language=ja"

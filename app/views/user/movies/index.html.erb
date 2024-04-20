@@ -1,10 +1,22 @@
 <div class='container'>
-  <div class='row'>
-    <%= form_with(url: movies_path, method: :get) do |form| %>
-      <%= form.text_field :looking_for, placeholder: 'Movie Title...', size: 30 %>
-      <%= form.submit 'search', class: 'btn btn-secondary' %>
+  <div class='row mb-2'>
+    <i class="fa-solid fa-magnifying-glass"></i>　映画タイトルで検索する
+  </div>
+  <div class='row mb-3'>
+    <%= form_with url: movies_path, method: :get, local: :true do |f| %>
+      <%= f.text_field :looking_for, placeholder: '映画タイトルを入力', size: 30 %>
+      <%= f.submit 'search' %>
     <% end %>
   </div>
+  <div class='row mb-2'>
+    <i class="fa-solid fa-tag"></i>　レビュータグで検索する
+  </div>
+  <div class="row mb-3">
+    <% @tags.each do |tag| %>
+      <%= link_to tag, tags_path(tag: tag), class: 'btn btn-outline-secondary mr-2 mb-2' %>
+    <% end %>
+  </div>
+  
 
   <div class='row my-5'>
     <% @movies.each do |movie| %>
@@ -19,12 +31,33 @@
           <% end %>
         </div>
         <div class='card-body'>
-          <p class='item-details item-name card-text'><%= movie['title'] %></p>
+          <div class="average_stars" data-score="<%= movie['average_score'] || 0 %>"></div>
+          <div class="average_star"><%= movie['average_score'] || 0 %>/5点</div>
+          <script>
+            $(document).on('turbolinks:load', function() {
+              let elements = document.querySelectorAll('.average_stars');
+              elements.forEach(function(element) {
+                let score = element.dataset.score;
+                if(element == null) return;
+                element.innerHTML = "";
+                let opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  scoreName: 'review[star]',
+                  half: true,
+                  readOnly: true,
+                  score: score || 0,
+                };
+                raty(element, opt);
+              });
+            });
+          </script>
         </div>
       </div>
     <% end %>
-    
-    <div class="text-center mb-5">
+
+    <div class='text-center mb-5'>
       <%= paginate @movies %>
     </div>
   </div>

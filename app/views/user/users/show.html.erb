@@ -3,7 +3,6 @@
     <div class="col-5">
       <%= image_tag @user.get_profile_image(200,200) %>
     </div>
-
     <div class="col-7">
       <table class="mb-5">
         <tr>
@@ -19,42 +18,31 @@
           <th class="col-3">followers: <%= link_to @user.followers.count, user_followers_path(@user) %></th>
         </tr>
       </table>
-      <% unless @user.guest_user?%>
-        <div class='row'>
-          <% if current_user != @user %>
-            <td><%= render 'user/relationships/btn', user: @user, options: { class: ""}  %></td>
-          <% elsif current_user == @user %>
-            <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-              <i class="fas fa-user-cog"></i>
-            <% end %>
+      <div class='row'>
+        <% if current_user != @user %>
+          <td><%= render 'user/relationships/btn', user: @user, options: { class: ""}  %></td>
+        <% elsif current_user == @user %>
+          <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+            <i class="fas fa-user-cog"></i>
           <% end %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a href="#movie_reviews" class="nav-link active" data-toggle="tab"><i class="fa-solid fa-comment"></i>Movie reviews</a>
+      <a href="#movie_reviews" class="nav-link active" data-toggle="tab"><i class="fa-solid fa-comment"></i> Movie reviews</a>
     </li>
     <li class="nav-item">
       <a href="#favorite_movies" class="nav-link" data-toggle="tab"><i class="fa-regular fa-thumbs-up"></i> Favorite movies</a>
     </li>
-    <li class="nav-item">
-      <a href="#check_movies" class="nav-link" data-toggle="tab"><i class="fa-solid fa-check"></i> Check movies</a>
-    </li>
   </ul>
-  
   <div class="tab-content mt-3">
     <div id="movie_reviews" class="tab-pane fade show active">
-      <%= render 'reviews', reviews: @reviews %>
+      <%= render 'user/reviews/index', reviews: @reviews %>
     </div>
     <div id="favorite_movies" class="tab-pane fade">
-      <p><%= render 'favorites', favorites: @favorites, movie: @movie %></p>
-    </div>
-    <div id="check_movies" class="tab-pane fade">
-      <p>セクション3のコンテンツが表示されます。</p>
+      <%= render 'user/favorites/index', favorites: @favorites, movie: @movie %>
     </div>
   </div>
-  
 </div>

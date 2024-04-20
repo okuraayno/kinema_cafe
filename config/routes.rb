@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
 # ゲストログイン
   devise_scope :user do
-    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+    post "user/guest_sign_in", to: "user/sessions#guest_sign_in"
   end
 
   root 'user/homes#top'
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       end
       resource :favorite, only: [:create, :destroy]
     end
-    get "search" => "searches#search"
+    get "tags" => "tags#search"
   end
 
 

@@ -1,0 +1,15 @@
+<% if admin_signed_in? %>
+  <% if controller_name == "members" %>
+    <%= form_with url: admin_members_path, method: :get, local: true do |f| %>
+      <%= f.text_field :content %>
+      <%= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}) %>
+      <%= f.submit "検索" %>
+    <% end %>
+  <% elsif controller_name == "reviews" %>
+    <%= form_with url: admin_reviews_path, method: :get, local: true do |f| %>
+      <%= f.text_field :content %>
+      <%= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}) %>
+      <%= f.submit "検索" %>
+    <% end %>
+  <% end %>
+<% end %>

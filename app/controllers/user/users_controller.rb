@@ -3,16 +3,18 @@ class User::UsersController < ApplicationController
   before_action :set_movie, only: [:show]
 
   def index
-    if params[:looking_for].present?
-      @users = User.where("name LIKE ?", "%#{params[:looking_for]}%")
+    if params[:content].blank?  # 検索フォームが空の場合
+      @users = User.all  # ユーザー全件を取得
     else
-      @users = User.all
+      @users = User.search_for(params[:content], params[:method])  # 検索結果を取得
     end
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
   end
 
   def show
     @user = User.find(params[:id])
     @reviews = @user.reviews
+    pp @reviews
     @favorites = @user.favorites
   end
   
@@ -25,6 +27,7 @@ class User::UsersController < ApplicationController
     is_matching_login_user
     @user = User.find(params[:id])
     if @user.update(user_params)
+      flash[:notice] = "You have updated user successfully."
       redirect_to user_path(@user)
     else
       render :edit
