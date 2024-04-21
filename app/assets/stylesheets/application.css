@@ -1,15 +1,227 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/*ボタン*/
+.float1 {
+    border: 1px solid #ccc;
+    color: #333;
+    padding:10px 20px;
+    display: inline-block;
+    text-decoration: none; 
+    outline: none;
+    border-radius: 20px;
+    transition: all .3s;
+}
+
+.float1:hover {
+  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.3);
+  border-color: transparent;
+}
+
+/*topリンク*/
+.navbar-brand.underline-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.navbar-brand.underline-hover::after {
+  position: absolute;
+  bottom: -0.1em;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  opacity: 0;
+  transition: .3s;
+}
+
+.navbar-brand.underline-hover:hover::after {
+  bottom: 0;
+  opacity: 1;
+}
+
+/*フッター*/
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  background-color: #b4ada9;
+  color: #fff;
+}
+
+
+.btnlinestretches2{
+  position:relative;
+  color:#333;
+  padding: 10px 30px;
+  display:inline-block;
+  text-decoration: none;
+  outline: none;
+}
+
+.btnlinestretches2::before,
+.btnlinestretches2::after {
+  content:'';
+  position:absolute;
+  border:solid #333;
+  width:10px;
+  height:10px;
+  transition:all 0.3s ease-in-out;
+}
+
+.btnlinestretches2::before{
+  top:0;
+  left:0;
+  border-width:2px 0 0 2px;
+}
+
+.btnlinestretches2::after{
+  bottom:0;
+  right:0;
+  border-width:0 2px 2px 0;
+}
+
+.btnlinestretches2:hover::before,
+.btnlinestretches2:hover::after{
+  width:calc(100% - 2px);
+  height:calc(100% - 2px);
+  border-color:#666
+}
+
+.btn06{
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  background:#333;
+  color:#fff;
+  padding: 10px 40px 10px 30px;
+  border-radius:25px;
+  text-align: center;
+  outline: none;
+  transition: ease .2s;
+}
+
+.btn06:hover{
+  background:#555;
+}
+
+.btnarrow{
+  position: relative;
+  display: inline-block;
+  padding: 0 20px;
+  color: #333;
+  text-decoration: none;
+  outline: none;
+}
+
+.btnarrow::before{
+  content: '';
+  position: absolute;
+  bottom:-8px;
+  left:15%;
+  width: 85%;
+  height: 1px;
+  background:#333;
+  transition: all .3s;
+}
+
+.btnarrow::after{
+  content: '';
+  position: absolute;
+  bottom:-3px;
+  right:0;
+  width: 15px;
+  height:1px;
+  background:#333;
+  transform: rotate(35deg);
+  transition: all .3s;
+}
+
+/*topボタン*/
+.btntransform{
+  position: relative;
+  display: inline-block;
+  padding:0 0 0 15px;
+  line-height: 50px;
+  color: #333;
+  text-decoration: none;
+  outline: none;
+}
+
+.btntransform::before{
+  content:'';
+  position:absolute;
+  left:0;
+  z-index: -1;
+  width: 50px;
+  height: 50px;
+  background: #b4ada9;
+  border-radius: 25px;
+  transition:.3s ease-out;
+}
+.btntransform:hover::before{
+  width:212px;
+}
+
+.btntransform::after{
+  position: absolute;
+  content: '';
+  top: 1.3em;
+  right: -15px;
+  width: 5px;
+  height: 5px;
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+  transform: rotate(45deg);
+}
+
+/*流れるテキスト*/
+.slide-in {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.slide-in_inner {
+  display: inline-block;
+}
+
+.leftAnime{
+  opacity: 0;
+}
+
+.slideAnimeLeftRight {
+  animation-name:slideTextX100;
+  animation-duration:0.8s;
+  animation-fill-mode:forwards;
+  opacity: 0;
+}
+
+@keyframes slideTextX100 {
+  from {
+    transform: translateX(-100%); /*要素を左の枠外に移動*/
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);/*要素を元の位置に移動*/
+    opacity: 1;
+  }
+}
+
+.slideAnimeRightLeft {
+  animation-name:slideTextX-100;
+  animation-duration:0.8s;
+  animation-fill-mode:forwards;
+  opacity: 0;
+}
+
+@keyframes slideTextX-100 {
+  from {
+    transform: translateX(100%);/*要素を右の枠外に移動*/
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);/*要素を元の位置に移動*/
+    opacity: 1;
+  }
+}

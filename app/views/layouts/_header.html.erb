@@ -1,55 +1,56 @@
-    <div id="header" class="Regular shadow">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-          <a class="navbar-brand p-3" href="/"><i class="fa-solid fa-clapperboard"></i> <b>Kinema Cafe.</b></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= link_to "about", about_path, class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'mypage', user_path(current_user.id), class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'movies', movies_path, class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'users', users_path, class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "sign_out", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-              </li>
-            <% elsif admin_signed_in? %>
-              <li class="nav-item">
-                <%= link_to "会員一覧", admin_members_path, class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to '投稿一覧', admin_reviews_path, class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'お問い合わせ一覧', admin_root_path, class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'ログアウト', destroy_admin_session_path,  method: :delete, class:'nav-link text-dark' %>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to "about", about_path, class: 'nav-link text-dark' %>
-              </li>
-              </li>
-              <li class="nav-item">
-                <%= link_to "sign_up", new_user_registration_path, class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "sign_in", new_user_session_path, class: 'nav-link text-dark' %>
-              </li>
-            <% end %>
-            </ul>
-          </div>
-        </div>
-      </nav>
+<div id="header" class="large shadow", style="background-color: #b4ada9;">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand p-3 underline-hover" style="color: #fff" href="/">
+        <i class="fa-solid fa-clapperboard"></i> <b>Kinema Cafe.</b>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "about", about_path, class: 'nav-link float1 mr-2' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'my page', user_path(current_user.id), class: 'nav-link float1 mr-2' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'movies', movies_path, class: 'nav-link float1 mr-2' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'users', users_path, class: 'nav-link float1 mr-2' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "sign out", destroy_user_session_path, method: :delete, class: 'nav-link float1 mr-2' %>
+          </li>
+        <% elsif admin_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "会員一覧", admin_members_path, class: 'nav-link float1 mr-2' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '投稿一覧', admin_reviews_path, class: 'nav-link float1 mr-2' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'お問い合わせ一覧', admin_root_path, class: 'nav-link float1 mr-2' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'ログアウト', destroy_admin_session_path,  method: :delete, class: 'nav-link float1 mr-2' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "about", about_path, class: 'nav-link float1 mr-2' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "sign up", new_user_registration_path, class: 'nav-link float1 mr-2' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "sign in", new_user_session_path, class: 'nav-link float1 mr-2' %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
     </div>
+  </nav>
+</div>
