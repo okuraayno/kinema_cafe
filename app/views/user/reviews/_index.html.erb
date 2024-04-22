@@ -1,70 +1,58 @@
 <% reviews.each do |review| %>
-  <div class='d-flex flex-row mb-5'>
-    <div class='mr-2'>
-    <% if controller_name == 'movies' %>
-      <%= link_to user_path(review.user.id) do %>
-        <%=image_tag review.user.get_profile_image(50,50) %></br>
-        <%= review.user.name %>
-      <% end %>
-    <% else %>
-      <% movie_data = Movie.fetch_movie_data(review.movie_id) %>
-      <%= link_to movie_path(review.movie_id) do %>
-        <% if movie_data['poster_path'] %>
-          <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie_data['poster_path'], size: '50x80', style: 'max-width: 100%;' %>
-        <% else %>
-          <%= image_tag 'no_image_tate.jpg', size: '50x80', style: "max-width: 100%;" %>
-        <% end %>
-      <% end %>
-    <% end %>
-    </div>
-    <div>
-      <%= link_to movie_review_path(review.movie_id, review.id) do %>
-        <%= review.title %>
-      <% end %>
-      <div id='eval_star_<%= review.id %>'></div>
-      <div class="eval_star"><%= review.star %>/5点</div>
-      <script>
-        $(document).on('turbolinks:load', function() {
-          let elem = document.querySelector('#eval_star_<%= review.id %>');
-          if (elem == null || elem.classList.contains('raty-initialized')) return;
-          let opt = {
-            starOn: "<%= asset_path('star-on.png') %>",
-            starOff: "<%= asset_path('star-off.png') %>",
-            starHalf: "<%= asset_path('star-half.png') %>",
-            score: "<%= review.star %>",
-            half: true,
-            readOnly: true,
-          };
-          raty(elem, opt);
-          elem.classList.add('raty-initialized');
-        });
-      </script>
-      <div style="max-width: 400px;">
-      <% if review.spoiler == true %>
-        <a role="button" data-toggle="collapse" href="#example1" aria-expanded="false" aria-controls="example1">
-          <i class="fa-solid fa-triangle-exclamation"></i> ネタバレを表示する
-        </a>
-        <div class="collapse" id="example1">
-          <div>
-            <%= review.comment %>
-          </div>
-          <% if review.tag.present? %>
-            <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-              <%= review.tag %>
-            </div>
+  <table class='table table-borderless' style="max-width: 600px; color: #675D50;">
+    <tr>
+      <% if controller_name == "movies" %>
+        <td style="width: 50px;">
+          <%= link_to user_path(review.user.id) do %>
+            <%=image_tag review.user.get_profile_image(70,70) %></br>
+            <%= review.user.name %>
           <% end %>
-        </div>
-      <% else %>
-        <div>
-          <%= review.comment %>
-        </div>
-        <% if review.tag.present? %>
-          <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-            <%= review.tag %>
-          </div>
-        <% end %>
+        </td>
       <% end %>
-      </div>
-    </div>
-  </div>
+      <td style="width: 300px;">
+        <% if controller_name == "users" %>
+          <% movie_data = Movie.fetch_movie_data(review.movie_id) %>
+          <p>
+            <i class="fa-solid fa-feather"></i> 
+            <%= link_to movie_data['title'], movie_path(review.movie_id) %>へのレビュ
+          </p>
+        <% end %>
+        <%= link_to review.title, movie_review_path(review.movie_id, review.id) %>
+        <div id='eval_star_<%= review.id %>'></div>
+        <div class="eval_star"><%= review.star %>/5点</div>
+        <script>
+          $(document).on('turbolinks:load', function() {
+            let elem = document.querySelector('#eval_star_<%= review.id %>');
+            if (elem == null || elem.classList.contains('raty-initialized')) return;
+            let opt = {
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              score: "<%= review.star %>",
+              half: true,
+              readOnly: true,
+            };
+            raty(elem, opt);
+            elem.classList.add('raty-initialized');
+          });
+        </script>
+        <% if review.spoiler == true %>
+          <a role="button" data-toggle="collapse" href="#example1" aria-expanded="false" aria-controls="example1">
+            <i class="fa-solid fa-triangle-exclamation"></i> ネタバレを表示する
+          </a>
+          <div class="collapse" id="example1">
+            <%= review.comment %>
+            <% if review.tag.present? %>
+              <p><%= link_to review.tag, tags_path(tag: review.tag), class: "tag mr-5" %></p>
+            <% end %>
+          </div>
+        <% else %>
+          <%= review.comment %>
+          <% if review.tag.present? %>
+            <p><%= link_to review.tag, tags_path(tag: review.tag), class: "tag mr-5" %></p>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
 <% end %>

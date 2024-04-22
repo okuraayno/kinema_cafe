@@ -1,3 +1,8 @@
+/*文字色*/
+main {
+  color: #675D50;
+}
+
 /*ボタン*/
 .float1 {
     border: 1px solid #ccc;
@@ -272,4 +277,22 @@
   100% {
     opacity: 0;
   }
+}
+
+/*タグの形*/
+.tag {
+  width: 150px;
+  position: relative;
+  margin-right: 20px;
+  padding: 10px 20px;
+  background-image:
+    radial-gradient(circle, white 2px, #ddcdb3 3px 7px, transparent 8px),
+    linear-gradient(135deg, transparent 10px, #ddcdb3 11px),
+    linear-gradient(45deg, transparent 10px, #ddcdb3 11px);
+  background-repeat: no-repeat;
+  background-size: 25px, 100% 50%, 100% 50%;
+  background-position: left, top, bottom;
+  font-weight: bold;
+  font-size: 8px;
+  overflow: hidden;
 }
