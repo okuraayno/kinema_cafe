@@ -16,7 +16,7 @@ class User::MoviesController < ApplicationController
     else
       movies = []
       (1..5).each do |page|
-        url = "https://api.themoviedb.org/3/movie/popular?api_key=#{ENV['TMDB_API_KEY']}&language=ja&page=#{page}"
+        url = "https://api.themoviedb.org/3/movie/now_playing?api_key=#{ENV['TMDB_API_KEY']}&language=ja&page=#{page}"
         response = Net::HTTP.get_response(URI.parse(url))
         if response.code == "200"
           result = JSON.parse(response.body)

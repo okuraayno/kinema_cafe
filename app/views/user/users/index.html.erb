@@ -1,10 +1,11 @@
 <div class="container">
   <div class='row'>
-    <%= render "user/searches/form" %>
-  <div class="col-12 my-3">
+    <div class="col-12">
     <h3><i class="fa-solid fa-user"></i> Users</h3>
+    <%= render "user/searches/form" %>
     <%= render "user/users/index", users: @users %>
   </div>
+
   <div class="text-center mb-3">
     <%= paginate @users %>
   </div>
