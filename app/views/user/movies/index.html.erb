@@ -1,36 +1,39 @@
-<div class='container'>
-  <div class='row mb-2'>
+<div class="loading">
+  <%= image_tag 'logo.png', class: "loading__logo" %>
+</div>
+
+<div class="container">
+  <div class="row mb-2">
     <i class="fa-solid fa-magnifying-glass"></i>　映画タイトルで検索する
   </div>
-  <div class='row mb-3'>
+  <div class="row mb-3">
     <%= form_with url: movies_path, method: :get, local: :true do |f| %>
       <%= f.text_field :looking_for, placeholder: '映画タイトルを入力', size: 30 %>
       <%= f.submit 'search' %>
     <% end %>
   </div>
-  <div class='row mb-2'>
+  <div class="row mb-2">
     <i class="fa-solid fa-tag"></i>　レビュータグで検索する
   </div>
   <div class="row mb-3">
     <% @tags.each do |tag| %>
-      <%= link_to tag, tags_path(tag: tag), class: 'btn btn-outline-secondary mr-2 mb-2' %>
+      <%= link_to tag, tags_path(tag: tag), class: "float1 mr-3 mb-2" %>
     <% end %>
   </div>
-  
 
-  <div class='row my-5'>
+  <div class="row my-5">
     <% @movies.each do |movie| %>
-      <div class='col-12 col-sm-6 col-md-4 col-lg-3'>
-        <div class='card bg-transparent border-0' style='width: 100%;'>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card bg-transparent border-0" style="width: 100%;">
           <%= link_to movie_path(movie['id']) do %>
             <% if movie['poster_path'] %>
-              <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: '200x300', style: 'max-width: 100%;' %>
+              <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: "200x300", class: "large shadow", style: "max-width: 100%;" %>
             <% else %>
-              <%= image_tag 'no_image_tate.jpg', size: '200x300', style: "max-width: 100%;" %>
+              <%= image_tag 'no_image_tate.jpg', size: "200x300", class: "large shadow", style: "max-width: 100%;" %>
             <% end %>
           <% end %>
         </div>
-        <div class='card-body'>
+        <div class="card-body">
           <div class="average_stars" data-score="<%= movie['average_score'] || 0 %>"></div>
           <div class="average_star"><%= movie['average_score'] || 0 %>/5点</div>
           <script>
@@ -57,7 +60,7 @@
       </div>
     <% end %>
 
-    <div class='text-center mb-5'>
+    <div class="text-center">
       <%= paginate @movies %>
     </div>
   </div>

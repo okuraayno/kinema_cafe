@@ -1,16 +1,23 @@
 <dev class="container">
   <div class="row">
     <div class="mx-auto">
-      <h1>Welcome to <i class="fa-solid fa-clapperboard"></i> <b>Kinema Cafe.</b></h1>
+      <h1>
+        <span class="slide-in leftAnime">
+        <span class="slide-in_inner leftAnimeInner">
+          Welcome to <i class="fa-solid fa-clapperboard"></i> <b>Kinema Cafe.</b>
+        </span>
+        </span>
+      </h1>
+      <p class="text-center">カフェのようにのんびり映画をたしなむレビューサイト</p>
       <div class="btn-wrapper col-10 mx-auto">
-        <div class="row">
-          <%=link_to "ゲストログイン(閲覧用)", user_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+        <div class="row mt-5">
+          <%=link_to "guest sign in (閲覧用)", user_guest_sign_in_path, method: :post, class: "text-decoration-none btntransform" %>
         </div>
-        <div class="row">
-          <%= link_to 'Log in', new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+        <div class="row mt-5">
+          <%= link_to 'sign in', new_user_session_path, class: "text-decoration-none btntransform" %>
         </div>
-        <div class="row">
-          <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+        <div class="row mt-5">
+          <%= link_to 'sign up', new_user_registration_path, class: "text-decoration-none btntransform" %>
         </div>
       </div>
     </dev>
