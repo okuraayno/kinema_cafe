@@ -1,7 +1,10 @@
 class User::MoviesController < ApplicationController
+  # 非ログイン時にアクセスするとログイン画面に遷移
+  before_action :authenticate_user!
   before_action :set_movie, only: [:show]
 
   def index
+    # フォームから受け取った値で映画検索
     if params[:looking_for].present? 
       movie_title = params[:looking_for]
       movies = []
@@ -14,6 +17,7 @@ class User::MoviesController < ApplicationController
         end
       end
     else
+      # 検索フォームが空の場合
       movies = []
       (1..5).each do |page|
         url = "https://api.themoviedb.org/3/movie/now_playing?api_key=#{ENV['TMDB_API_KEY']}&language=ja&page=#{page}"
@@ -25,7 +29,8 @@ class User::MoviesController < ApplicationController
       end
     end
     @movies = Kaminari.paginate_array(movies).page(params[:page]).per(20)
-    @movies.each do |movie| # 各ムービーに評価平均値を追加
+     # 各ムービーに評価平均値を追加
+    @movies.each do |movie|
       reviews = Review.where(movie_id: movie['id'])
       average_score = reviews.average(:star).to_f.round(1)
       movie['average_score'] = average_score
@@ -35,7 +40,7 @@ class User::MoviesController < ApplicationController
 
   def show
     @movie_genre_names = Movie.fetch_genre_names(params[:id])
-    @reviews = Review.where(movie_id: @movie['id'])
+    @reviews = Review.where(movie_id: @movie['id']).page(params[:page]).per(20)
     if params[:latest]
       @reviews = @reviews.latest
     elsif params[:star_count]

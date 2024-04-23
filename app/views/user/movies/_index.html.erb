@@ -1,15 +1,17 @@
 <div class="row">
   <% @movies.each do |movie| %>
     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+
       <div class="card bg-transparent border-0" style="width: 100%;">
         <%= link_to movie_path(movie['id']) do %>
           <% if movie['poster_path'] %>
-            <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: "200x300", class: "large shadow", style: "max-width: 100%;" %>
+            <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: "200x300", class: "large shadow float1", style: "max-width: 100%;" %>
           <% else %>
-            <%= image_tag 'no_image_tate.jpg', size: "200x300", class: "large shadow", style: "max-width: 100%;" %>
+            <%= image_tag 'no_image_tate.jpg', size: "200x300", class: "large shadow float1", style: "max-width: 100%;" %>
           <% end %>
         <% end %>
       </div>
+
       <div class="card-body">
         <% if controller_name == 'movies' %>
           <div class="average_stars" data-score="<%= movie['average_score'] || 0 %>"></div>
@@ -38,6 +40,7 @@
           <%= content_tag :div, content, class: "tag mr-5" %>
         <% end %>
       </div>
+
     </div>
   <% end %>
 </div>

@@ -1,4 +1,4 @@
-<div id="header" class="large shadow", style="background-color: #b4ada9;">
+<div class="large shadow", style="background-color: #b4ada9;">
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand p-3 underline-hover" style="color: #fff" href="/">
@@ -11,42 +11,39 @@
         <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "about", about_path, class: 'nav-link float1 mr-2' %>
+            <%= link_to "Home", user_path(current_user.id), class: "nav-link float1 mr-2" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'my page', user_path(current_user.id), class: 'nav-link float1 mr-2' %>
+            <%= link_to "Movies", movies_path, class: "nav-link float1 mr-2" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'movies', movies_path, class: 'nav-link float1 mr-2' %>
+            <%= link_to "Users", users_path, class: "nav-link float1 mr-2" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'users', users_path, class: 'nav-link float1 mr-2' %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "sign out", destroy_user_session_path, method: :delete, class: 'nav-link float1 mr-2' %>
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link float1 mr-2" %>
           </li>
         <% elsif admin_signed_in? %>
           <li class="nav-item">
-            <%= link_to "会員一覧", admin_members_path, class: 'nav-link float1 mr-2' %>
+            <%= link_to "会員一覧", admin_members_path, class: "nav-link float1 mr-2" %>
           </li>
           <li class="nav-item">
-            <%= link_to '投稿一覧', admin_reviews_path, class: 'nav-link float1 mr-2' %>
+            <%= link_to "投稿一覧", admin_reviews_path, class: "nav-link float1 mr-2" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'お問い合わせ一覧', admin_root_path, class: 'nav-link float1 mr-2' %>
+            <%= link_to "お問い合わせ一覧", admin_root_path, class: "nav-link float1 mr-2" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'ログアウト', destroy_admin_session_path,  method: :delete, class: 'nav-link float1 mr-2' %>
+            <%= link_to "ログアウト", destroy_admin_session_path,  method: :delete, class: "nav-link float1 mr-2" %>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "about", about_path, class: 'nav-link float1 mr-2' %>
+            <%= link_to "About", about_path, class: "nav-link float1 mr-2" %>
           </li>
           <li class="nav-item">
-            <%= link_to "sign up", new_user_registration_path, class: 'nav-link float1 mr-2' %>
+            <%= link_to "Sign up", new_user_registration_path, class: "nav-link float1 mr-2" %>
           </li>
           <li class="nav-item">
-            <%= link_to "sign in", new_user_session_path, class: 'nav-link float1 mr-2' %>
+            <%= link_to "Sign in", new_user_session_path, class: "nav-link float1 mr-2" %>
           </li>
         <% end %>
         </ul>

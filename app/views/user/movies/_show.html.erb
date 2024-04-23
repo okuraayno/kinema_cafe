@@ -5,6 +5,7 @@
       <p>(<%= Date.parse(@movie['release_date']).strftime("%Y") %>)</p>
     </td>
   </tr>
+
   <tr>
     <td style="width: 200px;">
       <% if movie['poster_path'] %>
@@ -39,12 +40,15 @@
         });
       </script>
     </td>
+  </tr>
+
   <tr>
     <td colspan="2">
       <p><b>ジャンル:</b></p>
       <p><%= movie_genre_names %></p>
     </td>
   </tr>
+
   <tr>
     <td colspan="2">
       <p><%= movie['overview'] %></p>

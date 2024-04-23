@@ -1,5 +1,5 @@
 <% reviews.each do |review| %>
-  <table class='table table-borderless' style="max-width: 600px; color: #675D50;">
+  <table class="table table-borderless" style="max-width: 600px; color: #675D50;">
     <tr>
       <% if controller_name == "movies" %>
         <td style="width: 50px;">
@@ -9,15 +9,17 @@
           <% end %>
         </td>
       <% end %>
+
       <td style="width: 300px;">
         <% if controller_name == "users" %>
           <% movie_data = Movie.fetch_movie_data(review.movie_id) %>
           <p>
             <i class="fa-solid fa-feather"></i> 
-            <%= link_to movie_data['title'], movie_path(review.movie_id) %>へのレビュ
+            <%= link_to movie_data['title'], movie_path(review.movie_id) %>へのレビュー
           </p>
         <% end %>
         <%= link_to review.title, movie_review_path(review.movie_id, review.id) %>
+
         <div id='eval_star_<%= review.id %>'></div>
         <div class="eval_star"><%= review.star %>/5点</div>
         <script>
@@ -36,6 +38,7 @@
             elem.classList.add('raty-initialized');
           });
         </script>
+
         <% if review.spoiler == true %>
           <a role="button" data-toggle="collapse" href="#example1" aria-expanded="false" aria-controls="example1">
             <i class="fa-solid fa-triangle-exclamation"></i> ネタバレを表示する
@@ -56,3 +59,7 @@
     </tr>
   </table>
 <% end %>
+
+<div class="text-center my-3">
+  <%= paginate reviews %>
+</div>

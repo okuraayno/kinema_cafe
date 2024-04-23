@@ -27,13 +27,18 @@
       <hr>
       <div>
         <%= render 'index', moviews: @moviews %>
+        <hr>
       </div>
-      
-      <p class="pagetop float1"><a href="#container"><i class="fa-solid fa-angles-up"></i></a></p>
-      
-      <div class="text-center">
-        <%= paginate @movies %>
-      </div>
+    </div>
+
+    <p class="pagetop float1">
+      <a href="#container">
+        <i class="fa-solid fa-angles-up"></i>
+      </a>
+    </p>
+
+    <div class="text-center my-3">
+      <%= paginate @movies %>
     </div>
   </div>
 </div>

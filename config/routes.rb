@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-# 管理者側
+  # 管理者側
   devise_for :admin, skip: [:registrations, :passwords] , controllers: {
   sessions: "admin/sessions"
   }
@@ -13,13 +13,14 @@ Rails.application.routes.draw do
     end
   end
 
-# ユーザー側
+  # ユーザー側
   devise_for :user,skip: [:passwords], controllers: {
     registrations: "user/registrations",
     sessions: 'user/sessions'
   }
 
-# ゲストログイン
+
+  # ゲストログイン
   devise_scope :user do
     post "user/guest_sign_in", to: "user/sessions#guest_sign_in"
   end
@@ -42,6 +43,4 @@ Rails.application.routes.draw do
     get "tags" => "tags#search"
   end
 
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

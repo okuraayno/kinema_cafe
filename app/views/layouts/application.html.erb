@@ -11,17 +11,20 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+
   <body>
     <header>
       <%= render 'layouts/header' %>
     </header>
+
     <main>
       <p id="notice"><%= notice %></p>
       <div id="main" class="py-2">
         <%= yield %>
       </div>
     </main>
-    <footer>
+
+    <footer id="footer">
       <%= render 'layouts/footer' %>
     </footer>
   </body>

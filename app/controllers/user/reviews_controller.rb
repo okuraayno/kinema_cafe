@@ -1,5 +1,7 @@
 class User::ReviewsController < ApplicationController
-
+  # 非ログイン時にアクセスするとログイン画面に遷移
+  before_action :authenticate_user!
+  before_action :is_matching_login_user, only: [:edit, :update]
   before_action :set_movie, only: [:show, :new, :create, :edit, :update, :destroy]
   before_action :set_movie_genre_names, only: [:show, :new, :edit, :destroy]
 
@@ -40,7 +42,6 @@ class User::ReviewsController < ApplicationController
     @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
   end
 
-  # ローカル変数にする
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
@@ -58,7 +59,6 @@ class User::ReviewsController < ApplicationController
 
   private
 
-# 特定の映画データを取得
   def set_movie
     @movie = Movie.fetch_movie_data(params[:movie_id])
   end
@@ -69,6 +69,13 @@ class User::ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:user_id, :movie_id, :title, :comment, :star, :spoiler, :tag)
+  end
+  
+  def is_matching_login_user
+    @reviews = Review.find(params[:id])
+    unless @reviews.user_id == current_user.id
+      redirect_to movie_review_path, notice: "他ユーザーのレビュー編集画面には遷移できません。"
+    end
   end
 
 end

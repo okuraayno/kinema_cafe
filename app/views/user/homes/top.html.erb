@@ -8,16 +8,19 @@
         </span>
         </span>
       </h1>
+
       <p class="text-center">カフェのようにのんびり映画をたしなむレビューサイト</p>
       <div class="btn-wrapper col-10 mx-auto">
         <div class="row mt-5">
-          <%=link_to "guest sign in (閲覧用)", user_guest_sign_in_path, method: :post, class: "text-decoration-none btntransform" %>
+          <%= link_to 'Sign up', new_user_registration_path, class: "text-decoration-none btntransform" %>
         </div>
+
         <div class="row mt-5">
-          <%= link_to 'sign in', new_user_session_path, class: "text-decoration-none btntransform" %>
+          <%= link_to 'Sign in', new_user_session_path, class: "text-decoration-none btntransform" %>
         </div>
+
         <div class="row mt-5">
-          <%= link_to 'sign up', new_user_registration_path, class: "text-decoration-none btntransform" %>
+          <%=link_to "Guest sign in (閲覧用)", user_guest_sign_in_path, method: :post, class: "text-decoration-none btntransform" %>
         </div>
       </div>
     </dev>

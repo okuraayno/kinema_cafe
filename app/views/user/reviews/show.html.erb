@@ -76,5 +76,6 @@
       </div>
       <%= render "user/comments/form", review: @review, comment: @comment %>
     </div>
+    <%= link_to 'Back', movie_path(@movie['id']), class: "back" %>
   </div>
 </div>
