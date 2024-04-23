@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h3><i class="fa-regular fa-envelope"></i> Contact</h3>
+      <hr>
+
+      <table>
+        <tbody>
+          <tr>
+            <td class="text-center" style="width: 30%;">お名前</td>
+            <td><%= @contact.name %></td>
+          </tr>
+          <tr>
+            <td class="text-center" style="width: 30%;">メールアドレス</td>
+            <td><%= @contact.email %></td>
+          </tr>
+          <tr>
+            <td class="text-center">お問い合わせ内容</td>
+            <td style="white-space: pre-wrap;"><%= @contact.message %></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+
+      <%= form_with model: @contact do |f| %>
+        <%= f.hidden_field :name %>
+        <%= f.hidden_field :email %>
+        <%= f.hidden_field :message %>
+        <div class="mb-3">
+          <%= f.submit "送信", class: "float1" %>
+        </div>
+      <% end %>
+
+      <%= form_with model: @contact, url: back_path do |f| %>
+        <%= f.hidden_field :name %>
+        <%= f.hidden_field :email %>
+        <%= f.hidden_field :message %>
+        <div class="mb-3">
+          <%= f.submit "入力画面に戻る", class: "float1" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

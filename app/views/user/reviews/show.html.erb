@@ -40,7 +40,7 @@
                     <%= @review.comment %>
                   </div>
                   <% if @review.tag.present? %>
-                    <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
+                    <div class="tag">
                       <%= @review.tag %>
                     </div>
                   <% end %>
@@ -76,5 +76,6 @@
       </div>
       <%= render "user/comments/form", review: @review, comment: @comment %>
     </div>
+    <%= link_to 'Back', movie_path(@movie['id']), class: "back" %>
   </div>
 </div>

@@ -1,26 +1,35 @@
-<h2>Log in</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3>Sign in</h3>
+      <%= form_with model: @user, url: user_session_path do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
 
-<%= form_with model: @user, url: user_session_path do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <div class="actions">
+          <%= f.submit "sign in !", class: "float1" %>
+        </div>
+      <% end %>
+
+      <div class="mt-2">
+        <%= render "user/shared/links" %>
+        <%=link_to "Guest sign in (閲覧用)", user_guest_sign_in_path, method: :post %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "user/shared/links" %>
+</div>

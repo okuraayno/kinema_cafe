@@ -1,26 +1,25 @@
-<table class='table' style="max-width: 400px;">
+<table class='table' style="max-width: 400px; color: #675D50;">
   <tr>
-    <% if movie['poster_path'] %>
-      <td>
-          <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: '200x220', class: "large shadow", style: "max-width: 100%;" %>
-      </td>
-    <% else %>
-      <td>
+    <td colspan="2">
+      <h4><b><%= movie['title'] %></b></h4>
+      <p>(<%= Date.parse(@movie['release_date']).strftime("%Y") %>)</p>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="width: 200px;">
+      <% if movie['poster_path'] %>
+        <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: '200x250', class: "large shadow", style: "max-width: 100%;" %>
+      <% else %>
         <div class="Regular shadow">
-          <%= image_tag 'no_image_tate.jpg', size: '200x220',class: "large shadow", style: "max-width: 100%;" %>
+          <%= image_tag 'no_image_tate.jpg', size: '200x250',class: "large shadow", style: "max-width: 100%;" %>
         </div>
-      </td>
-    <% end %>
-    <th style="text-align: left;">
-      <h5><b><%= movie['title'] %></b></h5>
-      <br>
-      公開日:
-      <br>
-      <%= Date.parse(@movie['release_date']).strftime("%Y/%m/%d") %>
-      <br>
-      <br>
-      平均評価:
-      <br>
+      <% end %>
+    </td>
+    <td style="text-align: left; vertical-align: top;">
+      <p><b>公開日:</b></p>
+      <p><%= Date.parse(@movie['release_date']).strftime("%Y/%m/%d") %></p>
+      <p><b>平均評価:</b></p>
       <div id="average_stars"></div>
       <div class="average_star"><%= @average_score %>/5点</div>
       <script>
@@ -40,18 +39,19 @@
           raty(elem, opt);
         });
       </script>
-    </th>
-  </tr>
-  <tr>
-    <td colspan="2">
-      ジャンル:
-      <br>
-      <%= movie_genre_names %>
     </td>
   </tr>
+
   <tr>
     <td colspan="2">
-      <%= movie['overview'] %>
+      <p><b>ジャンル:</b></p>
+      <p><%= movie_genre_names %></p>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <p><%= movie['overview'] %></p>
     </td>
   </tr>
 </table>

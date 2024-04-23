@@ -1,5 +1,7 @@
 class User::UsersController < ApplicationController
-
+  # 非ログイン時にアクセスするとログイン画面に遷移
+  before_action :authenticate_user!
+  before_action :is_matching_login_user, only: [:edit, :update]
   before_action :set_movie, only: [:show]
 
   def index
@@ -13,18 +15,15 @@ class User::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reviews = @user.reviews
-    pp @reviews
+    @reviews = @user.reviews.page(params[:page]).per(20)
     @favorites = @user.favorites
   end
   
   def edit
-    is_matching_login_user
     @user = User.find(params[:id])
   end
 
   def update
-    is_matching_login_user
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "You have updated user successfully."
@@ -47,7 +46,7 @@ class User::UsersController < ApplicationController
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id
-      redirect_to user_path(current_user)
+      redirect_to user_path, notice: "他ユーザーの編集画面には遷移できません。"
     end
   end
   

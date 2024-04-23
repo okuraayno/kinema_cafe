@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-# 管理者側
+  # 管理者側
   devise_for :admin, skip: [:registrations, :passwords] , controllers: {
   sessions: "admin/sessions"
   }
@@ -11,15 +11,17 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]
     end
+    resources :contacts, only: [:index, :show, :update]
   end
 
-# ユーザー側
+  # ユーザー側
   devise_for :user,skip: [:passwords], controllers: {
     registrations: "user/registrations",
     sessions: 'user/sessions'
   }
 
-# ゲストログイン
+
+  # ゲストログイン
   devise_scope :user do
     post "user/guest_sign_in", to: "user/sessions#guest_sign_in"
   end
@@ -33,15 +35,20 @@ Rails.application.routes.draw do
         get "followings" => "relationships#followings", as: "followings"
         get "followers" => "relationships#followers", as: "followers"
     end
+
     resources :movies, only: [:index, :show] do
       resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy] do
         resources :comments, only: [:create, :destroy]
       end
       resource :favorite, only: [:create, :destroy]
     end
+
+    resources :contacts, only: [:new, :create]
+    post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
+    post 'contacts/back', to: 'contacts#back', as: 'back'
+    get 'done', to: 'contacts#done', as: 'done'
+
     get "tags" => "tags#search"
   end
 
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
     case resource
     when Admin
       admin_root_path
-    when User
-      user_path(resource)
     else
       user_path(resource)
     end
@@ -22,6 +20,7 @@ class ApplicationController < ActionController::Base
   
   protected
   
+  # 新規登録時ユーザー名のデータ操作を許可
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end

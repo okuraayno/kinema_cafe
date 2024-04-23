@@ -1,9 +1,11 @@
 <div class='container'>
-  <div class='row'>
-    <div class='col-5'>
+  <div class='row justify-content-center'>
+
+    <div class='col-lg-5 col-12'>
       <%= render 'show', movie: @movie, average_score: @average_score, movie_genre_names: @movie_genre_names %>
     </div>
-    <div class='col-6'>
+
+    <div class='col-lg-6 col-12'>
       <div class="d-flex flex-row mb-2">
         <div class="p-2" id="favorite_btn_<%= @movie['id'] %>">
           <%= render 'user/favorites/btn', movie: @movie%>
@@ -12,6 +14,7 @@
           <%= link_to "review", new_movie_review_path(movie_id: @movie['id']), class:"float1" %>
         </div>
       </div>
+
       <div class="mb-6">
         <h4><i class="fa-solid fa-feather"></i> スコア・レビュー</h4>
       </div>
@@ -21,8 +24,9 @@
             <span>|</span>
           <%= link_to '評価の高い順', movie_path(star_count: "true") %>
         </div>
-        <%= render 'user/reviews/index', reviews: @reviews %>
+        <%= render 'user/reviews/index', reviews: @reviews, tag: @tags %>
       </div>
     </div>
+
   </div>
 </div>

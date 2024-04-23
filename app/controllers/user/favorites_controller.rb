@@ -1,6 +1,5 @@
 class User::FavoritesController < ApplicationController
 
-# set_movie呼び出し
   before_action :set_movie, only: [:create, :update]
 
   def create
