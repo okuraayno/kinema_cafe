@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]
     end
+    resources :contacts, only: [:index, :show, :update]
   end
 
   # ユーザー側
@@ -34,12 +35,19 @@ Rails.application.routes.draw do
         get "followings" => "relationships#followings", as: "followings"
         get "followers" => "relationships#followers", as: "followers"
     end
+
     resources :movies, only: [:index, :show] do
       resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy] do
         resources :comments, only: [:create, :destroy]
       end
       resource :favorite, only: [:create, :destroy]
     end
+
+    resources :contacts, only: [:new, :create]
+    post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
+    post 'contacts/back', to: 'contacts#back', as: 'back'
+    get 'done', to: 'contacts#done', as: 'done'
+
     get "tags" => "tags#search"
   end
 
