@@ -1,6 +1,6 @@
 <div class="mt-3">
   <%= form_with model: [review, comment], url: movie_review_comments_path(review.movie_id, review.id), local: false do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "comment", class: "w-100", id: "comment_textarea" %>
-    <%= f.submit "送信する" %>
+    <%= f.text_area :comment, placeholder: "コメントを投稿", class: "w-100", id: "comment_textarea" %>
+    <%= f.submit "送信する", class:"float1" %>
   <% end %>
 </div>

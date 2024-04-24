@@ -5,7 +5,7 @@
       <%= render 'show', movie: @movie, average_score: @average_score, movie_genre_names: @movie_genre_names %>
     </div>
 
-    <div class='col-lg-6 col-12'>
+    <div class='col-lg-7 col-12'>
       <div class="d-flex flex-row mb-2">
         <div class="p-2" id="favorite_btn_<%= @movie['id'] %>">
           <%= render 'user/favorites/btn', movie: @movie%>
@@ -21,10 +21,10 @@
       <div>
         <div class="my-3">
           <%= link_to '新着順', movie_path(latest: "true") %>
-            <span>|</span>
+          <span>|</span>
           <%= link_to '評価の高い順', movie_path(star_count: "true") %>
         </div>
-        <%= render 'user/reviews/index', reviews: @reviews, tag: @tags %>
+        <%= render 'user/reviews/movie_reviews', reviews: @reviews, tag: @tags %>
       </div>
     </div>
 

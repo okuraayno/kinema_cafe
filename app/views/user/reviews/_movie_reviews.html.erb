@@ -1,0 +1,55 @@
+<% reviews.each do |review| %>
+  <div class="row align-items-start mt-5">
+    <div class="col-2">
+      <%= link_to user_path(review.user.id) do %>
+        <%= image_tag review.user.get_profile_image(60, 60) %><br>
+        <%= review.user.name %>
+      <% end %>
+    </div>
+
+    <div class="col-10">
+      <%= link_to review.title, movie_review_path(review.movie_id, review.id) %>
+      <div id='eval_star_<%= review.id %>'></div>
+      <div class="eval_star"><%= review.star %>/5点</div>
+      <script>
+        $(document).on('turbolinks:load', function() {
+          let elem = document.querySelector('#eval_star_<%= review.id %>');
+          if (elem == null || elem.classList.contains('raty-initialized')) return;
+          let opt = {
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            score: "<%= review.star %>",
+            half: true,
+            readOnly: true,
+          };
+          raty(elem, opt);
+          elem.classList.add('raty-initialized');
+        });
+      </script>
+
+      <% if review.spoiler == true %>
+        <a role="button" data-toggle="collapse" href="#example_<%= review.id %>" aria-expanded="false" aria-controls="example_<%= review.id %>">
+          <i class="fa-solid fa-triangle-exclamation"></i> ネタバレを表示する
+        </a>
+        <div class="collapse" id="example_<%= review.id %>">
+          <%= review.comment %>
+          <% if review.tag.present? %>
+            <p><%= link_to review.tag, tags_path(tag: review.tag), class: "tag mr-5" %></p>
+          <% end %>
+        </div>
+      <% else %>
+        <%= review.comment %>
+        <% if review.tag.present? %>
+          <p><%= link_to review.tag, tags_path(tag: review.tag), class: "tag mr-5" %></p>
+        <% end %>
+      <% end %>
+
+      <div>コメント数：<%= review.comments.count %></div>
+    </div>
+  </div>
+<% end %>
+
+<div class="text-center my-3">
+  <%= paginate reviews %>
+</div>

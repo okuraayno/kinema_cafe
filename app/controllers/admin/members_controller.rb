@@ -7,6 +7,7 @@ class Admin::MembersController < ApplicationController
     else
       @members = User.search_for(params[:content], params[:method])
     end
+    @members = Kaminari.paginate_array(@members).page(params[:page]).per(10)
   end
 
   def show

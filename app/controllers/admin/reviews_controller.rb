@@ -8,6 +8,7 @@ class Admin::ReviewsController < ApplicationController
     else
       @reviews = Review.search_for(params[:content], params[:method])  # 検索結果を取得
     end
+    @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
   end
 
   def show

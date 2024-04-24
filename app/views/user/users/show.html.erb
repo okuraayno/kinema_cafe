@@ -1,46 +1,48 @@
 <div class="container">
-  <div class="row mb-5">
-    <div class="col-5">
+  <div class="row justify-content-center">
+    <div class="col-12 mb-2">
+      <h3><i class="fa-solid fa-house"></i> My Page</h3>
+      <hr>
+    </div>
+
+    <div class="col-lg-3 col-5">
       <%= image_tag @user.get_profile_image(200,200) %>
     </div>
-    <div class="col-7">
-      <table class="mb-5">
-        <tr>
-          <th class="col-3">name:</th>
-          <th class="col-5"><%= @user.name %></th>
-        </tr>
-        <tr>
-          <th class="col-3">introduction:</th>
-          <th class="col-5"><%= @user.introduction %></th>
-        </tr>
-        <tr>
-          <th class="col-3">follows: <%= link_to @user.followings.count, user_followings_path(@user) %></th>
-          <th class="col-3">followers: <%= link_to @user.followers.count, user_followers_path(@user) %></th>
-        </tr>
-      </table>
-      <div class='row'>
+
+    <div class="col-lg-7 col-5">
+      <h4><%= @user.name %></h4>
+      <p><%= @user.introduction %></p>
+      <p>
+        フォロー：<%= link_to @user.followings.count, user_followings_path(@user) %>人
+        <span>|</span>
+        フォロワー：<%= link_to @user.followers.count, user_followers_path(@user) %>人
+      </p>
         <% if current_user != @user %>
           <%= render 'user/relationships/btn', user: @user, options: { class: ""}  %>
         <% elsif current_user == @user %>
           <%= link_to "profile edit", edit_user_path(@user), class: "float1" %>
         <% end %>
-      </div>
     </div>
   </div>
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a href="#movie_reviews" class="nav-link active" data-toggle="tab"><i class="fa-solid fa-comment"></i> Movie reviews</a>
-    </li>
-    <li class="nav-item">
-      <a href="#favorite_movies" class="nav-link" data-toggle="tab"><i class="fa-regular fa-thumbs-up"></i> Favorite movies</a>
-    </li>
-  </ul>
-  <div class="tab-content mt-3">
-    <div id="movie_reviews" class="tab-pane fade show active">
-      <%= render 'user/reviews/index', reviews: @reviews %>
-    </div>
-    <div id="favorite_movies" class="tab-pane fade">
-      <%= render 'user/favorites/index', favorites: @favorites, movie: @movie %>
+
+  <div class="row justify-content-center my-5">
+    <div class="col-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a href="#movie_reviews" class="nav-link active" data-toggle="tab"><i class="fa-solid fa-comment"></i> Movie reviews</a>
+        </li>
+        <li class="nav-item">
+          <a href="#favorite_movies" class="nav-link" data-toggle="tab"><i class="fa-regular fa-thumbs-up"></i> Favorite movies</a>
+        </li>
+      </ul>
+      <div class="tab-content mt-3">
+        <div id="movie_reviews" class="tab-pane fade show active">
+          <%= render 'user/reviews/user_reviews', reviews: @reviews %>
+        </div>
+        <div id="favorite_movies" class="tab-pane fade">
+          <%= render 'user/favorites/index', favorites: @favorites, movie: @movie %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

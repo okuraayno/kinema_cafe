@@ -1,15 +1,14 @@
-<div class='container'>
-  <div class='row'>
-    <div class='col-6'>
-      <%= render 'user/movies/show', movie: @movie, average_score: @average_score, movie_genre_names: @movie_genre_names %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-12">
+      <%= render "user/movies/show", movie: @movie, average_score: @average_score, movie_genre_names: @movie_genre_names %>
     </div>
     
-    <div class='col-6'>
+    <div class="col-lg-7 col-12">
       <table>
         <thead>
           <th><%= @review.title %></th>
         </thead>
-    
         <tbody>
           <tr>
             <th id="star_<%= @review.id %>"></th>
@@ -50,26 +49,28 @@
                   <%= @review.comment %>
                 </div>
                 <% if @review.tag.present? %>
-                  <div class="badge bg-secondary text-light text-wrap" style="width: 6rem;">
-                    <%= @review.tag %>
-                  </div>
+                  <p><%= link_to @review.tag, tags_path(tag: @review.tag), class: "tag mr-5" %></p>
                 <% end %>
               <% end %>
             </td>
+          </tr>
+          <tr>
+            <% if @review.user == current_user %>
+              <td>
+                <%= link_to "編集", edit_movie_review_path(@review.movie_id, @review.id) %>
+                <span>|</span>
+                <%= link_to "削除", @reviews, method: :delete, data: { confirm: '本当に消しますか？' } %>
+              </td>
+            <% end %>
           </tr>
           <tr>
             <td id="comment_counter">
              <%= render "user/comments/counter", review: @review %>
            </td>
           </tr>
-          <tr>
-            <% if @review.user == current_user %>
-              <td><%= link_to 'Edit', edit_movie_review_path(@review.movie_id, @review.id), class:"btn btn-secondary" %></td>
-              <td><%= link_to 'Destroy', @reviews, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-            <% end %>
-          </tr>
         </tbody>
       </table>
+      <hr>
 
       <div id="comment_index">
         <%= render "user/comments/index", review: @review, comment: @comment %><br>
