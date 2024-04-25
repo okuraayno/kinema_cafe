@@ -1,28 +1,108 @@
-<dev class="container">
-  <div class="row">
-    <div class="mx-auto">
-      <h1>
-        <span class="slide-in leftAnime">
-        <span class="slide-in_inner leftAnimeInner">
-          Welcome to <i class="fa-solid fa-clapperboard"></i> <b>Kinema Cafe.</b>
-        </span>
-        </span>
-      </h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="mx-auto mb-2">
+      <span class="slide-in leftAnime">
+      <span class="slide-in_inner leftAnimeInner">
+        <h1>Welcome to <i class="fa-solid fa-clapperboard"></i> <b>Kinema Cafe.</b></h1>
+      </span>
+      </span>
+    </div>
+  </div>
 
-      <p class="text-center">カフェのようにのんびり映画をたしなむレビューサイト</p>
-      <div class="btn-wrapper col-10 mx-auto">
-        <div class="row mt-5">
-          <%= link_to 'Sign up', new_user_registration_path, class: "text-decoration-none btntransform" %>
-        </div>
+  <p class="text-center">カフェのようにのんびり映画をたしなむレビューサイト</p>
+  <p class="text-center">好きな映画をチェックしていいねを付けたり</p>
+  <p class="text-center">鑑賞した映画の感想や考察を気ままに投稿することができます</i></p>
+  <hr>
 
-        <div class="row mt-5">
-          <%= link_to 'Sign in', new_user_session_path, class: "text-decoration-none btntransform" %>
-        </div>
+  <p class="text-center mt-5"><b>新着レビュー</b></p>
 
-        <div class="row mt-5">
-          <%=link_to "Guest sign in (閲覧用)", user_guest_sign_in_path, method: :post, class: "text-decoration-none btntransform" %>
+  <div class="row justify-content-center">
+    <% @reviews.each do |review| %>
+      <div class="col-12 mb-3">
+        <div class="card text-bg-light mx-auto" style="max-width: 25rem;">
+          <% movie_data = Movie.fetch_movie_data(review.movie_id) %>
+          <div class="card-header">
+            映画"<%= movie_data['title'] %>"へのレビュー
+          </div>
+          <div class="card-body">
+            <div id="star_<%= review.id %>"></div>
+            <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#star_<%= review.id %>');
+                if (elem == null) return;
+                elem.innerHTML = "";
+                let opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  score: "<%= review.star %>",
+                  readOnly: true,
+                };
+                raty(elem, opt);
+              });
+            </script>
+            <h5 class="card-title"><%= review.title %></h5>
+            <p class="card-text"><%= review.comment %></p>
+          </div>
         </div>
       </div>
-    </dev>
-  </dev>
-</dev>
+    <% end %>
+  </div>
+  <hr>
+
+  <p class="text-center mt-5"><b>新着いいねが付けられた映画</b></p>
+
+  <div class="row justify-content-center">
+     <% @favorites.each do |favorite| %>
+       <div class="col-lg-4 col-12 mb-3 d-flex justify-content-center">
+        <% movie_data = Movie.fetch_movie_data(favorite.movie_id) %>
+        <div class="text-center">
+          <% if movie_data['poster_path'] %>
+            <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie_data['poster_path'], size: "230x300", class: "large shadow float1", style: "max-width: 100%;" %>
+          <% else %>
+            <%= image_tag 'no_image_tate.jpg', size: "230x300", class: "large shadow float1", style: "max-width: 100%;" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <hr>
+
+  <% if user_signed_in? %>
+    <div class="row justify-content-center">
+      <div class="mx-auto mb-2">
+        <div class="row mt-5">
+          <%= link_to "映画を探しに行く", movies_path, class: "text-decoration-none btntransform" %>
+        </div>
+        <div class="row mt-5">
+          <%= link_to "映画好きを探しに行く", users_path, class: "text-decoration-none btntransform" %>
+        </div>
+        <div class="row my-5">
+          <%=link_to "マイページへ", user_path(current_user.id), class: "text-decoration-none btntransform" %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <p class="text-center mt-5">会員登録後、映画検索やレビュー投稿を行えるようになります</p>
+    <p class="text-center">ゲストユーザーでサインインした場合は、閲覧のみとなります</p>
+    <div class="row justify-content-center">
+      <div class="mx-auto mb-2">
+        <div class="row mt-5">
+          <%= link_to "新規登録はこちらから", new_user_registration_path, class: "text-decoration-none btntransform" %>
+        </div>
+        <div class="row mt-5">
+          <%= link_to "会員の方はこちらから", new_user_session_path, class: "text-decoration-none btntransform" %>
+        </div>
+        <div class="row my-5">
+          <%=link_to "ゲストユーザーログイン", user_guest_sign_in_path, method: :post, class: "text-decoration-none btntransform" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <p class="pagetop float1">
+    <a href="#container">
+      <i class="fa-solid fa-angles-up"></i>
+    </a>
+  </p>
+</div>

@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+.field_with_errors {
+  display: contents;
+}
+
 body {
   display: flex;
   flex-flow: column;
@@ -336,3 +340,4 @@ main {
     -moz-opacity: 0.5;
     opacity: 0.5;
 }
+

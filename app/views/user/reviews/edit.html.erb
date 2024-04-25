@@ -1,12 +1,15 @@
-<div class='container'>
-  <div class='row'>
-    <div class='col-6'>
-      <%= render 'user/movies/show', movie: @movie, average_score: @average_score, movie_genre_names: @movie_genre_names  %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-12">
+      <%= render "user/movies/show", movie: @movie, average_score: @average_score, movie_genre_names: @movie_genre_names  %>
     </div>
     
-    <div class='col-6'>
-      <%= render 'form', review: @review %>
-      <%= link_to 'Back', movie_review_path, class: "back" %>
+    <div class="col-lg-7 col-12">
+      <%= render "form", review: @review %>
+    </div>
+
+    <div=class="text-center my-3">
+      <%= link_to "Back", movie_path(@movie['id']), class: "back" %>
     </div>
   </div>
 </div>

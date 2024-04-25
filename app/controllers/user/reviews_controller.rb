@@ -8,7 +8,7 @@ class User::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @comment = Comment.new
-    @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)  
+    @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
 
   end
 
@@ -25,13 +25,14 @@ class User::ReviewsController < ApplicationController
     if Review.exists?(user_id: current_user.id, movie_id: @movie['id'])
       redirect_to edit_movie_review_path(@movie['id'], current_user.reviews.find_by(movie_id: @movie['id']).id)
     else
-      review = Review.new(review_params)
-      review.user_id = current_user.id
-      if review.save
-        flash[:notice] = "You have created review successfully."
+      @review = Review.new(review_params)
+      @review.user_id = current_user.id
+      if @review.save
+        flash[:notice] = "レビューを投稿しました。"
         redirect_to movie_path(@movie['id'])
       else
-        render 'new'
+        flash[:notice] = "タイトル・レビュー内容は必ず入力してください。"
+        render "new"
       end
     end
   end
@@ -45,8 +46,11 @@ class User::ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
+      flash[:notice] = "レビューを編集しました。"
       redirect_to movie_path(@movie['id'])
     else
+      @rating = @review.star
+      flash[:notice] = "タイトル・レビュー内容は必ず入力してください。"
       render "edit"
     end
   end
@@ -67,15 +71,15 @@ class User::ReviewsController < ApplicationController
     @movie_genre_names = Movie.fetch_genre_names(params[:movie_id])
   end
 
-  def review_params
-    params.require(:review).permit(:user_id, :movie_id, :title, :comment, :star, :spoiler, :tag)
-  end
-  
   def is_matching_login_user
     @reviews = Review.find(params[:id])
     unless @reviews.user_id == current_user.id
       redirect_to movie_review_path, notice: "他ユーザーのレビュー編集画面には遷移できません。"
     end
+  end
+
+  def review_params
+    params.require(:review).permit(:user_id, :movie_id, :title, :comment, :star, :spoiler, :tag)
   end
 
 end

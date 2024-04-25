@@ -2,14 +2,13 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
-  validates :name, presence: true,length: { maximum: 50 }
-  validates :email, presence: true,uniqueness: true
-  validates :password, presence: true
 
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
+  
+  validates :name, presence: true,length: { maximum: 50 }
+  validates :email, presence: true,uniqueness: true
 
 # ゲストログイン用
   GUEST_USER_EMAIL = "guest@example.com"
@@ -45,15 +44,7 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-#ユーザーステータスが有効or利用停止である場合のユーザーログインについて
-  def user_status
-    if is_active == false
-      "利用停止"
-    else
-      "有効"
-    end
-  end
-  
+# 退会ユーザーのログイン制限
   def active_for_authentication?
     super && (is_active == true)
   end

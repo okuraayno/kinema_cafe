@@ -5,9 +5,9 @@
       <div class="card bg-transparent border-0" style="width: 100%;">
         <%= link_to movie_path(movie['id']) do %>
           <% if movie['poster_path'] %>
-            <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: "200x300", class: "large shadow float1", style: "max-width: 100%;" %>
+            <%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], size: "230x300", class: "large shadow float1", style: "max-width: 100%;" %>
           <% else %>
-            <%= image_tag 'no_image_tate.jpg', size: "200x300", class: "large shadow float1", style: "max-width: 100%;" %>
+            <%= image_tag 'no_image_tate.jpg', size: "230x300", class: "large shadow float1", style: "max-width: 100%;" %>
           <% end %>
         <% end %>
       </div>
