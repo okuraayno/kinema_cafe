@@ -25,7 +25,6 @@ window.raty = function(elem, opt) {
   return raty;
 }
 
-
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

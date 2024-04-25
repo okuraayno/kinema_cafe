@@ -15,8 +15,12 @@ class User::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reviews = @user.reviews.page(params[:page]).per(20)
-    @favorites = @user.favorites
+    @reviews = @user.reviews.page(params[:page]).per(10)
+  end
+  
+  def favorites 
+    @user = User.find(params[:user_id])
+    @favorites = @user.favorites.page(params[:page]).per(20)
   end
   
   def edit

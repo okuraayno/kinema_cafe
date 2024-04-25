@@ -1,6 +1,19 @@
-<h2>Follower Users</h2>
-  <% if @users.exists? %>
-    <%= render "user/users/index", users: @users %>
-  <% else %>
-    <p>ユーザーはいません</p>
-  <% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+
+      <h3><i class="fa-regular fa-handshake"></i> Follower Users</h3>
+      <hr>
+      <% if @users.exists? %>
+        <%= render "user/users/index", users: @users %>
+      <% else %>
+        <p>ユーザーはいません</p>
+      <% end %>
+    </div>
+    <hr>
+
+    <div class="text-center my-3">
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>

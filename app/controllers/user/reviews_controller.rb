@@ -8,7 +8,7 @@ class User::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @comment = Comment.new
-    @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)  
+    @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
 
   end
 
