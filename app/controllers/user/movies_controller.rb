@@ -40,7 +40,7 @@ class User::MoviesController < ApplicationController
 
   def show
     @movie_genre_names = Movie.fetch_genre_names(params[:id])
-    @reviews = Review.where(movie_id: @movie['id']).page(params[:page]).per(20)
+    @reviews = Review.where(movie_id: @movie['id']).page(params[:page]).per(10)
     if params[:latest]
       @reviews = @reviews.latest
     elsif params[:star_count]
