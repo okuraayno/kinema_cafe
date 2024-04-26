@@ -1,7 +1,7 @@
 class User::ReviewsController < ApplicationController
-  # 非ログイン時にアクセスするとログイン画面に遷移
   before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :ensure_guest_user, only: [:new, :create, :edit, :update]
   before_action :set_movie, only: [:show, :new, :create, :edit, :update, :destroy]
   before_action :set_movie_genre_names, only: [:show, :new, :edit, :destroy]
 
@@ -75,6 +75,12 @@ class User::ReviewsController < ApplicationController
     @reviews = Review.find(params[:id])
     unless @reviews.user_id == current_user.id
       redirect_to movie_review_path, notice: "他ユーザーのレビュー編集画面には遷移できません。"
+    end
+  end
+  
+  def ensure_guest_user
+    if current_user&.email == "guest@example.com"
+      redirect_to user_path(current_user), notice: "ゲストユーザーはこの操作を行うことはできません。"
     end
   end
 

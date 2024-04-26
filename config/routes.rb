@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    root 'homes#top'
-    resources :members, only: [:index, :show, :update]
+    root "members#index"
+    resources :members, only: [:show, :update]
     resources :reviews, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]
     end
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # ユーザー側
   devise_for :user,skip: [:passwords], controllers: {
     registrations: "user/registrations",
-    sessions: 'user/sessions'
+    sessions: "user/sessions"
   }
 
   # ゲストログイン
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     post "user/guest_sign_in", to: "user/sessions#guest_sign_in"
   end
 
-  root 'user/homes#top'
+  root "user/homes#top"
   get "/about" => "user/homes#about"
 
   scope module: :user do

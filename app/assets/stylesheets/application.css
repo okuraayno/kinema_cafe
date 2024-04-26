@@ -28,7 +28,39 @@ main {
   color: #fff;
 }
 
-/*ボタン・*/
+/*アバウトページ*/
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #b4ada9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle:hover::before {
+    content: '';
+    position: absolute;
+    border: 1px solid #333;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    opacity:1;
+    animation:1s circleanime2 forwards;
+}
+
+@keyframes circleanime2{
+	0%{
+	  transform: scale(0);
+	}
+	100%{
+		transform:scale(2);
+		opacity: 0;
+	}
+}
+
+/*ボタン*/
 .float1 {
     border: 1px solid #ccc;
     color: #333;
@@ -155,7 +187,7 @@ main {
   transition: all .3s;
 }
 
-/*topボタン*/
+/*ログイン・新規登録ボタン*/
 .btntransform{
   position: relative;
   display: inline-block;
@@ -216,12 +248,12 @@ main {
 
 @keyframes slideTextX100 {
   from {
-    transform: translateX(-100%); /*要素を左の枠外に移動*/
+    transform: translateX(-100%);
     opacity: 0;
   }
 
   to {
-    transform: translateX(0);/*要素を元の位置に移動*/
+    transform: translateX(0);
     opacity: 1;
   }
 }
@@ -235,12 +267,12 @@ main {
 
 @keyframes slideTextX-100 {
   from {
-    transform: translateX(100%);/*要素を右の枠外に移動*/
+    transform: translateX(100%);
     opacity: 0;
   }
 
   to {
-    transform: translateX(0);/*要素を元の位置に移動*/
+    transform: translateX(0);
     opacity: 1;
   }
 }
@@ -340,4 +372,3 @@ main {
     -moz-opacity: 0.5;
     opacity: 0.5;
 }
-

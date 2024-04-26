@@ -3,10 +3,11 @@
     <div class="col-12">
       <h3><i class="fa-solid fa-film"></i> Favorite movies</h3>
       <hr>
-      <% @favorites.each_slice(4) do |favorite_group| %>
+
+      <% if @favorites.exists? %>
         <div class="row">
-          <% favorite_group.each do |favorite| %>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+          <% @favorites.each do |favorite| %>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt-3">
               <div class="card bg-transparent border-0" style="width: 100%;">
                 <% movie_data = Movie.fetch_movie_data(favorite.movie_id) %>
                 <%= link_to movie_path(favorite.movie_id) do %>
@@ -23,10 +24,15 @@
             </div>
           <% end %>
         </div>
+      <% else %>
+        <p class="text-center mt-5">好きな映画を探しに行ってみましょう</p>
+        <%= link_to movies_path do %>
+          <p class="text-center mb-5"><i class="fa-solid fa-film"></i> 探しに行く</p>
+        <% end %>
       <% end %>
     <hr>
     </div>
-    
+
     <p class="pagetop float1">
       <a href="#container">
         <i class="fa-solid fa-angles-up"></i>
@@ -34,11 +40,8 @@
     </p>
 
     <div class="text-center my-3">
-    <%= paginate @favorites %>
-    </div>
-
-    <div class="text-center my-3">
-    <%= link_to "戻る", user_path(@user) %>
+      <%= paginate @favorites %>
+      <%= link_to "戻る", user_path(@user) %>
     </div>
   </div>
 </div>

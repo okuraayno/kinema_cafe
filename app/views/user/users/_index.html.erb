@@ -5,7 +5,9 @@
       <td><%=link_to user.name, user, class: "user_#{user.id}" %></td>
       <td>フォロー: <%=user.followings.count %>人</td>
       <td>フォロワー: <%=user.followers.count %>人</td>
-      <td><%= render "user/relationships/btn", user: user, options: { class: "follow-link" } %></td>
+      <% if current_user&.email != "guest@example.com" %>
+        <td><%= render "user/relationships/btn", user: user, options: { class: "follow-link" } %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
