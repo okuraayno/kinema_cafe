@@ -6,6 +6,7 @@ def search
   @content = params[:tag]
   @movie_ids = Review.where(tag: @content).distinct(:movie_id).pluck(:movie_id)
   @movies = @movie_ids.map { |movie_id| Movie.fetch_movie_data(movie_id) }
+  @movies = Kaminari.paginate_array(@movies).page(params[:page]).per(20)
   render "user/tags/index"
 end
 

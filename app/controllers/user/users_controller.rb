@@ -10,7 +10,6 @@ class User::UsersController < ApplicationController
     else
       @users = User.search_for(params[:content], params[:method])  # 検索結果を取得
     end
-
     @users = @users.where.not(email: 'guest@example.com') # ゲストユーザーは非表示
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
   end

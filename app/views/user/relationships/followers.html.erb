@@ -7,10 +7,10 @@
       <% if @users.exists? %>
         <%= render "user/users/index", users: @users %>
       <% else %>
-        <p>ユーザーはいません</p>
+        <p class="text-center my-5">ユーザーはいません</p>
       <% end %>
-    </div>
     <hr>
+    </div>
 
     <div class="text-center my-3">
       <%= paginate @users %>
