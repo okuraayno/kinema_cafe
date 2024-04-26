@@ -2,12 +2,12 @@ class User::TagsController < ApplicationController
   # 非ログイン時にアクセスするとログイン画面に遷移
   before_action :authenticate_user!
   
-  def search
-    @content = params[:tag]
-    @reviews = Review.where(tag: @content).page(params[:page]).per(20)
-    @movies = @reviews.map { |review| Movie.fetch_movie_data(review.movie_id) }
-    render "user/tags/index"
-  end
+def search
+  @content = params[:tag]
+  @movie_ids = Review.where(tag: @content).distinct(:movie_id).pluck(:movie_id)
+  @movies = @movie_ids.map { |movie_id| Movie.fetch_movie_data(movie_id) }
+  render "user/tags/index"
+end
 
   private
 
