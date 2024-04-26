@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-lg-3 col-5">
-      <%= image_tag @user.get_profile_image(200,200) %>
+      <%= image_tag @user.get_profile_image(150,150) %>
     </div>
 
     <div class="col-lg-7 col-5">
@@ -18,22 +18,24 @@
         フォロワー：<%= link_to @user.followers.count, user_followers_path(@user) %>人
       </p>
 
-      <div class="d-flex flex-row mb-2">
-        <div class="p-2">
-          <% if current_user != @user %>
-            <%= render 'user/relationships/btn', user: @user, options: { class: ""}  %>
-          <% elsif current_user == @user %>
-            <%= link_to "プロフィール編集", edit_user_path(@user), class: "float1" %>
-          <% end %>
+      <% if current_user&.email != "guest@example.com" %>
+        <div class="d-flex flex-row flex-wrap mb-2">
+          <div class="p-2">
+            <% if current_user != @user %>
+              <%= render 'user/relationships/btn', user: @user, options: { class: ""}  %>
+            <% elsif current_user == @user %>
+              <%= link_to "プロフィール編集", edit_user_path(@user), class: "float1" %>
+            <% end %>
+          </div>
+          <div class="p-2">
+            <%= link_to "いいねした映画", user_favorites_path(@user), class: "float1" %>
+          </div>
         </div>
-        <div class="p-2">
-        <%= link_to "いいねした映画", user_favorites_path(@user), class: "float1" %>
-        </div>
-      </div>
+      <% end %>
     </div>
 
     <div class="col-12 mb-2">
-      <h5> レビュー一覧</h5>
+      <h5><b>レビューした映画</b></h5>
       <hr>
     </div>
 

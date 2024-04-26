@@ -1,9 +1,15 @@
 <div class="large shadow", style="background-color: #b4ada9;">
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand p-3 underline-hover" style="color: #fff" href="/">
-        <i class="fa-solid fa-clapperboard"></i> <b>Kinema Cafe.</b>
-      </a>
+      <% if admin_signed_in? %>
+        <a class="navbar-brand p-3 underline-hover" style="color: #fff">
+          <i class="fa-solid fa-clapperboard"></i> <b>Kinema Cafe.</b>
+        </a>
+      <% else %>
+        <a class="navbar-brand p-3 underline-hover" style="color: #fff" href="/">
+          <i class="fa-solid fa-clapperboard"></i> <b>Kinema Cafe.</b>
+        </a>
+      <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,7 +30,7 @@
           </li>
         <% elsif admin_signed_in? %>
           <li class="nav-item">
-            <%= link_to "会員一覧", admin_members_path, class: "nav-link float1 mr-2" %>
+            <%= link_to "会員一覧", admin_root_path, class: "nav-link float1 mr-2" %>
           </li>
           <li class="nav-item">
             <%= link_to "投稿一覧", admin_reviews_path, class: "nav-link float1 mr-2" %>

@@ -12,7 +12,7 @@ class Admin::MembersController < ApplicationController
 
   def show
     @member = User.find(params[:id])
-    @reviews = @member.reviews
+    @reviews = Kaminari.paginate_array(@member.reviews).page(params[:page]).per(10)
   end
   
   def update

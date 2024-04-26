@@ -10,6 +10,8 @@ class User::UsersController < ApplicationController
     else
       @users = User.search_for(params[:content], params[:method])  # 検索結果を取得
     end
+
+    @users = @users.where.not(email: 'guest@example.com') # ゲストユーザーは非表示
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
   end
 
@@ -20,7 +22,7 @@ class User::UsersController < ApplicationController
   
   def favorites 
     @user = User.find(params[:user_id])
-    @favorites = @user.favorites.page(params[:page]).per(20)
+    @favorites = @user.favorites.page(params[:page]).per(10)
   end
   
   def edit
@@ -33,6 +35,7 @@ class User::UsersController < ApplicationController
       flash[:notice] = "更新内容が保存されました"
       redirect_to user_path(@user)
     else
+      flash[:notice] = "更新に失敗しました"
       render :edit
     end
   end
