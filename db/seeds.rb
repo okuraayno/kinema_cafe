@@ -22,10 +22,8 @@
 # User.create(name: '米', email: 'j@j', is_active: true, password: 'jjjjjj', introduction:'映画が好き')
 # User.create(name: 'tanaka', email: 'l@l', is_active: true, password: 'llllll', introduction:'こんにちは')
 
-Review.create(user_id:'1' , movie_id:'807' , title:'心に残る名作' , comment:'独特な雰囲気と暗く複雑なプロット。刑事コンビが、連続殺人鬼の手がかりを追い求める中で起こる、予測不能な展開に圧倒されました。' , star:'4.5' , spoiler:'false' )
-# Review.create(user_id:'2' , movie_id:'807' , title:'面白い' , comment:'何度も見返すほど好きな映画です。' , star:'5' , spoiler:'false' )
+Review.create(user_id:'2' , movie_id:'807' , title:'面白い' , comment:'何度も見返すほど好きな映画です。' , star:'5' , spoiler:'false' )
 Review.create(user_id:'3' , movie_id:'807' , title:'こわい' , comment:'グロテスクな描写が多く、少し苦手でした' , star:'' , spoiler:'false' )
-
 Review.create(user_id:'3' , movie_id:'1096197' , title:'さめかわいい' , comment:'さめが可愛かった' , star:'5' , spoiler:'true' )
 Review.create(user_id:'4' , movie_id:'1096197' , title:'アクションがすごい' , comment:'見知らぬ海底でのサメとの遭遇が恐怖を煽る。孤独と絶望が描かれる中、主人公たちの生き残りをかけた戦いが描かれる。' , star:'5' , spoiler:'false' )
 Review.create(user_id:'5' , movie_id:'1096197' , title:'サメ映画といえば' , comment:'サメとのバトルシーンが見所。派手なアクションとスリリングな展開で、サメ映画のファンにはたまらない作品。' , star:'4' , spoiler:'true' )
@@ -35,8 +33,6 @@ Review.create(user_id:'8' , movie_id:'1096197' , title:'迫力がすごい' , co
 Review.create(user_id:'9' , movie_id:'1096197' , title:'うーん' , comment:'海こわい' , star:'3' , spoiler:'true' )
 Review.create(user_id:'10' , movie_id:'1096197' , title:'最近の' , comment:'サメ映画ってすごい' , star:'5' , spoiler:'true' )
 Review.create(user_id:'11' , movie_id:'1096197' , title:'さめ飼いたい' , comment:'さめが可愛かった' , star:'3' , spoiler:'true' )
-
-Review.create(user_id:'1' , movie_id:'672' , title:'面白い' , comment:'魔法の世界へのさらなる深みを感じさせる傑作。ストーリーの展開やキャラクターの成長が素晴らしい。' , star:'5' , spoiler:'false' , tag:'名作')
 Review.create(user_id:'2' , movie_id:'672' , title:'原作ファンにとっても' , comment:'原作ファンにとっても満足のいく内容。細部にまでこだわった映像美と、ホグワーツの不思議な世界を堪能できる。' , star:'4' , spoiler:'true' , tag:'鑑賞記録')
 Review.create(user_id:'3' , movie_id:'672' , title:'やっと見た' , comment:'鑑賞記録' , star:'3' , spoiler:'false' , tag:'鑑賞記録')
 Review.create(user_id:'4' , movie_id:'672' , title:'鑑賞記録' , comment:'ダークな要素が増した本作は、より緊迫感が増し、サスペンスも一層引き立つ。魔法の世界に新たな謎が追加され、続きが気になる展開。' , star:'5' , spoiler:'true')
@@ -47,9 +43,6 @@ Review.create(user_id:'8' , movie_id:'673' , title:'犬かわいい' , comment:'
 Review.create(user_id:'9' , movie_id:'673' , title:'鑑賞しました' , comment:'鑑賞したので備忘録代わりのレビュー' , star:'4.5' , spoiler:'false' , tag:'鑑賞記録' )
 Review.create(user_id:'10' , movie_id:'673' , title:'2024年鑑賞' , comment:'見ました' , star:'1' , spoiler:'true' )
 Review.create(user_id:'12' , movie_id:'673' , title:'よかった' , comment:'原作の雰囲気を忠実に再現しつつも、新たなアプローチで物語を展開。魔法界の不気味さやホグワーツの秘密がより強調されている。' , star:'5' , spoiler:'true' )
-
-
-Review.create(user_id:'1' , movie_id:'603' , title:'SFの金字塔' , comment:'『マトリックス』は、SF映画の金字塔と呼ぶにふさわしい作品。没入感あふれる世界観と、独創的なアクションシーンが見事に融合している。' , star:'5' , spoiler:'false' )
 Review.create(user_id:'2' , movie_id:'603' , title:'面白い' , comment:'SFファン必見の傑作。アクション好きも哲学的な話が好きな人も、幅広い層に楽しめる作品' , star:'4' , spoiler:'true' , tag:'SF鑑賞部')
 Review.create(user_id:'3' , movie_id:'603' , title:'今更ですが' , comment:'見ました。' , star:'4' , spoiler:'false' , tag:'アクションガチ勢' )
 Review.create(user_id:'4' , movie_id:'603' , title:'1が一番面白い' , comment:'改めて鑑賞したので記録。' , star:'4.5' , spoiler:'false' , tag:'2024年初映画')
