@@ -9,21 +9,21 @@
       <table class="table table-borderless", style="color: #675D50;">
         <thead>
           <tr>
-            <th class="col-2">ID</th>
-            <th class="col-3">会員名</th>
-            <th class="col-3">メールアドレス</th>
-            <th class="col-3">会員ステータス</th>
+            <th class="col-2 text-center">会員ID</th>
+            <th class="col-2 text-center">会員名</th>
+            <th class="col-2 text-center">メールアドレス</th>
+            <th class="col-2 text-center">会員ステータス</th>
           </tr>
         </thead>
         <% @members.each do |member| %>
         <tbody>
           <tr>
-            <td class="align-middle"><%= member.id %></td>
-            <td class="align-middle">
+            <td class="text-center"><%= member.id %></td>
+            <td class="text-center">
               <%= link_to member.name, admin_member_path(member.id) %>
             </td>
-            <td><%= member.email %></td>
-            <td>
+            <td class="text-center"><%= member.email %></td>
+            <td class="text-center">
               <% if member.is_active == true %>
                 <span class="text-success font-weight-bold align-middle">有効</span>
               <% else %>

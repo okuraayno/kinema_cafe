@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     when Admin
       admin_root_path
     else
-      user_path(resource)
+      movies_path(resource)
     end
   end
   

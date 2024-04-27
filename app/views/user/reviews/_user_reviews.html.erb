@@ -1,5 +1,5 @@
 <% reviews.each do |review| %>
-  <div class="col-12 my-3 mx-3">
+  <div class="col-12 my-2 mx-3">
     <div class="row align-items-start">
       <div>
         <% movie_data = Movie.fetch_movie_data(review.movie_id) %>
@@ -12,7 +12,8 @@
         <% end %>
       </div>
 
-      <div class="col-10">
+      <div class="col-10 mb-3">
+        <b>映画：<%= link_to movie_data['title'], movie_path(review.movie_id) %>へのレビュー</b><br>
         <b><%= link_to review.title, movie_review_path(review.movie_id, review.id) %></b>
         <div class="my-2">
           <span id='eval_star_<%= review.id %>'></span>
@@ -51,8 +52,9 @@
             <p class="mt-3 mr-5"><%= link_to review.tag, tags_path(tag: review.tag), class: "tag" %></p>
           <% end %>
         <% end %>
-        <p class="mr-5 text-right"><%= review.created_at.strftime('%Y/%m/%d') %></p>
-        <p class="mr-5 text-right">コメント数：<%= review.comments.count %></p>
+        <p class="mt-2"><%= review.created_at.strftime('%Y/%m/%d') %>
+        <span>|</span>
+        コメント数：<%= review.comments.count %></p>
       </div>
     </div>
   </div>

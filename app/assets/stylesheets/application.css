@@ -19,6 +19,36 @@ main {
   color: #675D50;
 }
 
+body a {
+color: #801E1E;
+}
+
+body a:hover {
+color: #801E1E;
+}
+
+.square-button {
+  width: 30px;
+  height: 30px;
+  background-color: #b4ada9;
+  border: 1px solid #b4ada9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square-button2 {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border: 1px solid #b4ada9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .footer {
   width: 100%;
   height: 120px;
@@ -62,14 +92,25 @@ main {
 
 /*ボタン*/
 .float1 {
-    border: 1px solid #ccc;
-    color: #333;
-    padding:10px 20px;
-    display: inline-block;
-    text-decoration: none; 
-    outline: none;
-    border-radius: 20px;
-    transition: all .3s;
+  border: 1px solid #ccc;
+  color: #333;
+  padding:10px 20px;
+  display: inline-block;
+  text-decoration: none; 
+  outline: none;
+  border-radius: 20px;
+  transition: all .3s;
+}
+
+/* ハンバーガーメニューに格納された時のスタイル */
+@media (max-width: 800px) {
+  .nav-item {
+    margin: 5px 20px;
+  }
+  .nav-link {
+    display: block;
+    text-align: center;
+  }
 }
 
 .float1:hover {
@@ -274,54 +315,6 @@ main {
   to {
     transform: translateX(0);
     opacity: 1;
-  }
-}
-
-/*映画一覧ローディング*/
-.loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 10;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeOut 1.5s 2.5s forwards;
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-.loading__logo {
-  opacity: 0;
-  animation: logo_fade 2s 0.5s forwards;
-  width: 300px;
-}
-
-@keyframes logo_fade {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  60% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  100% {
-    opacity: 0;
   }
 }
 

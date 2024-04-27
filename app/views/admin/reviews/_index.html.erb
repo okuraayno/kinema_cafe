@@ -1,20 +1,20 @@
 <table class="table table-borderless", style="color: #675D50;">
   <thead>
     <tr>
-      <th class="col-2">レビューID</th>
-      <th class="col-3">投稿者</th>
-      <th class="col-3">レビューした作品名</th>
-      <th class="col-3">レビュータイトル</th>
+      <th class="col-1 text-center">レビューID</th>
+      <th class="col-2 text-center">投稿者</th>
+      <th class="col-2 text-center">レビューした作品名</th>
+      <th class="col-2 text-center">レビュータイトル</th>
     </tr>
   </thead>
   <% reviews.each do |review| %>
   <tbody>
     <tr>
-      <td class="align-middle"><%= review.id %></td>
-      <td class="align-middle"><%= review.user.name %></td>
+      <td class="text-center"><%= review.id %></td>
+      <td class="text-center"><%= review.user.name %></td>
       <% movie_data = Movie.fetch_movie_data(review.movie_id) %>
-      <td class="align-middle"><%= movie_data['title'] %></td>
-      <td class="align-middle"><%= link_to review.title, admin_review_path(review.id) %></td>
+      <td class="text-center"><%= movie_data['title'] %></td>
+      <td class="text-center"><%= link_to review.title, admin_review_path(review.id) %></td>
     </tr>
   </tbody>
   <% end %>
