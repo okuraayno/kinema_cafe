@@ -31,7 +31,7 @@ class User::ReviewsController < ApplicationController
         flash[:notice] = "レビューを投稿しました。"
         redirect_to movie_path(@movie['id'])
       else
-        flash[:notice] = "タイトル・レビュー内容は必ず入力してください。"
+        flash[:notice] = "投稿内容を確認してください。"
         render "new"
       end
     end
@@ -50,7 +50,7 @@ class User::ReviewsController < ApplicationController
       redirect_to movie_path(@movie['id'])
     else
       @rating = @review.star
-      flash[:notice] = "タイトル・レビュー内容は必ず入力してください。"
+      flash[:notice] = "編集内容を確認してください。"
       render "edit"
     end
   end
