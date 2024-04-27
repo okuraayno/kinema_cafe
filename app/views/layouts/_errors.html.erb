@@ -1,7 +1,7 @@
 <% if obj.errors.any? %>
   <div id="error_explanation">
     <% obj.errors.full_messages.each do |message| %>
-      <p><%= message %></p>
+      <p class="ml-5"><%= message %></p>
     <% end %>
   </div>
 <% end %>
