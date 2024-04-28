@@ -34,8 +34,10 @@
 
 
 ### 設計書
+- ER図
 <img src="https://github.com/okuraayno/kinema_cafe/assets/158453026/319c1696-5332-47cc-a518-c41b7d4964bd">
 
+- UI Flow
 <img src="https://github.com/okuraayno/kinema_cafe/assets/158453026/bb55b1ff-2dac-4390-8139-fdf38c7496bd">
 
 
