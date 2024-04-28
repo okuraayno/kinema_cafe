@@ -1,5 +1,4 @@
 class User::MoviesController < ApplicationController
-  # 非ログイン時にアクセスするとログイン画面に遷移
   before_action :authenticate_user!
   before_action :set_movie, only: [:show]
 
@@ -7,13 +6,13 @@ class User::MoviesController < ApplicationController
     # フォームから受け取った値で映画検索
     if params[:looking_for].present? 
       movie_title = params[:looking_for]
-      movies = []
+      movies = [] # 変数を空の配列で初期化し後続の処理で映画の情報を追加
       (1..5).each do |page|
         url = "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['TMDB_API_KEY']}&language=ja&query=" + URI.encode_www_form_component(movie_title) + "&page=#{page}"
-        response = Net::HTTP.get_response(URI.parse(url))
-        if response.code == "200"
-          result = JSON.parse(response.body)
-          movies.concat(result["results"])
+        response = Net::HTTP.get_response(URI.parse(url)) # APIエンドポイントに対してHTTPリクエストを送信、レスポンスを取得
+        if response.code == "200" # レスポンスのステータスコードが200の場合
+          result = JSON.parse(response.body) # レスポンス内容をJSON形式からRubyのハッシュに変換
+          movies.concat(result["results"]) # resultハッシュから映画の結果部分を取り出し`movies` 配列に連結
         end
       end
     else
@@ -42,12 +41,12 @@ class User::MoviesController < ApplicationController
       favorited = current_user.favorites.exists?(movie_id: movie['id'])
       movie['favorited'] = favorited
     end
+
     # すでにcurrent_userがレビューをしているか判定
     @movies.each do |movie|
       reviewed = current_user.reviews.exists?(movie_id: movie['id'])
       movie['reviewed'] = reviewed
     end
-
 
     @tags = fetch_top_tags
   end
@@ -74,4 +73,5 @@ class User::MoviesController < ApplicationController
   def set_movie
     @movie = Movie.fetch_movie_data(params[:id])
   end
+
 end
