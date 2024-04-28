@@ -34,7 +34,8 @@
 
 
 ### 設計書
-後ほど作成予定
+https://github.com/okuraayno/kinema_cafe/assets/158453026/319c1696-5332-47cc-a518-c41b7d4964bd
+https://github.com/okuraayno/kinema_cafe/assets/158453026/bb55b1ff-2dac-4390-8139-fdf38c7496bd
 
 
 ### 開発環境
