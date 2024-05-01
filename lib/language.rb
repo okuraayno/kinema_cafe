@@ -6,13 +6,14 @@ module Language
   class << self
     def get_data(text)
       # APIのURL作成
-      api_url = "https://language.googleapis.com/v1/documents:analyzeSentiment?key=#{ENV['GOOGLE_API_KEY']}"
+      api_url = "https://language.googleapis.com/v1/documents:analyzeEntities?key=#{ENV['GOOGLE_API_KEY']}"
       # APIリクエスト用のJSONパラメータ
       params = {
         document: {
           type: 'PLAIN_TEXT',
           content: text
-        }
+        },
+        "encodingType": "UTF8"
       }.to_json
       # Google Cloud Natural Language APIにリクエスト
       uri = URI.parse(api_url)
@@ -27,7 +28,7 @@ module Language
       if (error = response_body['error']).present?
         raise error['message']
       else
-        response_body['documentSentiment']['score']
+        response_body['entities'][0]['name']
       end  
     end
   end

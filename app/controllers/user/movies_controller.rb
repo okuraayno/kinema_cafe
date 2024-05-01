@@ -57,7 +57,7 @@ class User::MoviesController < ApplicationController
       @reviews = @reviews.star_count
     end
     @average_score = @reviews.average(:star).to_f.round(1)
-    @movie_overview = Language.get_data(@movie['overview'])
+    @keywords = Language.get_data(@movie['overview'])
   end
 
   private
