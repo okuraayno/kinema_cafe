@@ -29,14 +29,12 @@ class User::MoviesController < ApplicationController
       end
     end
     @movies = Kaminari.paginate_array(movies).page(params[:page]).per(20)
-
-     # 各ムービーに評価平均値を追加
+     # 各ムービーの評価平均値
     @movies.each do |movie|
       reviews = Review.where(movie_id: movie['id'])
       average_score = reviews.average(:star).to_f.round(1)
       movie['average_score'] = average_score
     end
-
     # すでにcurrent_userがいいねをしているか判定
     @movies.each do |movie|
       favorited = current_user.favorites.exists?(movie_id: movie['id'])
@@ -47,8 +45,6 @@ class User::MoviesController < ApplicationController
       reviewed = current_user.reviews.exists?(movie_id: movie['id'])
       movie['reviewed'] = reviewed
     end
-
-
     @tags = fetch_top_tags
   end
 
@@ -61,6 +57,7 @@ class User::MoviesController < ApplicationController
       @reviews = @reviews.star_count
     end
     @average_score = @reviews.average(:star).to_f.round(1)
+    @movie_overview = Language.get_data(@movie['overview'])
   end
 
   private
