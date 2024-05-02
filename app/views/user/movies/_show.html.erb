@@ -49,8 +49,25 @@
 
   <tr>
     <td colspan="2">
-      <p><%= movie['overview'] %></p>
-      <p><%= keywords %></p>
+      <p><b>あらすじ:</b></p>
+      <% if movie['overview'].present? %>
+        <p><%= movie['overview'] %></p>
+      <% else %>
+        <p>あらすじはありません</p>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <p><b>この映画につけられたキーワード:</b></p>
+      <% if keywords.present? %>
+        <% keywords.each do |keyword| %>
+          <a><%= keyword %></a>
+        <% end %>
+      <% else %>
+        <p>キーワードはありません</p>
+      <% end %>
     </td>
   </tr>
 </table>

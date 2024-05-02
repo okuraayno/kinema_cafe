@@ -27,7 +27,7 @@
           <%= link_to "評価の高い順", movie_path(star_count: "true") %>
         </div>
         <div style="max-height: 800px; overflow-y: auto;">
-          <%= render 'user/reviews/movie_reviews', reviews: @reviews, tag: @tags %>
+          <%= render 'user/reviews/movie_reviews', reviews: @reviews %>
         </div>
       </div>
     </div>

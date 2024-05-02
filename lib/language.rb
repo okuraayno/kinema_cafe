@@ -28,8 +28,10 @@ module Language
       if (error = response_body['error']).present?
         raise error['message']
       else
-        response_body['entities'][0]['name']
-      end  
+        entities = response_body['entities']
+        names = entities.map { |entity| entity['name'] }
+        names
+      end
     end
   end
 end
