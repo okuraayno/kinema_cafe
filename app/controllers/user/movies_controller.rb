@@ -71,4 +71,5 @@ class User::MoviesController < ApplicationController
   def set_movie
     @movie = Movie.fetch_movie_data(params[:id])
   end
+
 end
