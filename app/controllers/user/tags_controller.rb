@@ -4,6 +4,7 @@ class User::TagsController < ApplicationController
   
 def search
   @content = params[:tag]
+  # distinct(:movie_id)で検索結果のmovie_idの重複を削除、pluck(:movie_id)で検索結果からmovie_idの配列を取得
   @movie_ids = Review.where(tag: @content).distinct(:movie_id).pluck(:movie_id)
   @movies = @movie_ids.map { |movie_id| Movie.fetch_movie_data(movie_id) }
   @movies = Kaminari.paginate_array(@movies).page(params[:page]).per(20)

@@ -5,7 +5,7 @@ class User::SearchesController < ApplicationController
   def search
     @content = params[:content]
     @method = params[:method]
-    @model == "user"
+    @model = "user"
       @records = User.search_for(@content, @method)
   end
 end
