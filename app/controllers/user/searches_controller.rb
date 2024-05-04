@@ -8,4 +8,5 @@ class User::SearchesController < ApplicationController
     @model = "user"
       @records = User.search_for(@content, @method)
   end
+
 end
