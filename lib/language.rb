@@ -15,16 +15,15 @@ module Language
         },
         "encodingType": "UTF8"
       }.to_json
-      # Google Cloud Natural Language APIにリクエスト
+      # APIにリクエスト
       uri = URI.parse(api_url)
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
       request = Net::HTTP::Post.new(uri.request_uri)
       request['Content-Type'] = 'application/json'
       response = https.request(request, params)
-      # APIレスポンス出力
+      # APIレスポンス出力(JSON形式のデータをRubyのハッシュとして返す)
       response_body = JSON.parse(response.body)
-      pp response_body
       if (error = response_body['error']).present?
         raise error['message']
       else
