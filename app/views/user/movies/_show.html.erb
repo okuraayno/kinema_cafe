@@ -63,7 +63,7 @@
       <p><b>この映画につけられたキーワード:</b></p>
       <% if keywords.present? %>
         <% keywords.each do |keyword| %>
-          <a><%= keyword %></a>
+          <a><%= link_to keyword, keywords_path(keyword: keyword) %></a>
         <% end %>
       <% else %>
         <p>キーワードはありません</p>

@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     end
 
     get "tags" => "tags#search"
+    get "keywords" => "keywords#search"
   end
 
 end

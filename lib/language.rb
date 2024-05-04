@@ -28,7 +28,7 @@ module Language
         raise error['message']
       else
         entities = response_body['entities']
-        names = entities.map { |entity| entity['name'] }
+        names = entities.map { |entity| entity['name'] }.take(3)
         names
       end
     end

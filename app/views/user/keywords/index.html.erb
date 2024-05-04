@@ -1,0 +1,12 @@
+<div class='container'>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h3><i class="fa-solid fa-tag"></i> あらすじに"<%= @keyword %>"が含まれる映画</h3>
+      <hr>
+      <div class="my-3">
+        <%= render 'user/movies/index', movies: @movies %>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
