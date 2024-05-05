@@ -9,9 +9,20 @@
       <div class="mb-3">
         <%= form_with url: movies_path, method: :get, local: :true do |f| %>
           <%= f.text_field :looking_for, placeholder: '映画タイトルを入力', size: 30 %>
-          <%= f.submit 'search' %>
+          <%= f.submit 'search', class: "btn btn-outline-secondary btn-sm rounded-pill" %>
         <% end %>
       </div>
+
+      <div class="my-2">
+        <i class="fa-solid fa-magnifying-glass"></i>　キーワードで検索する
+      </div>
+      <div class="mb-3">
+        <%= form_with url: keywords_path, method: :get, local: :true do |f| %>
+          <%= f.text_field :keyword, placeholder: 'キーワードを入力', size: 30 %>
+          <%= f.submit 'search', class: "btn btn-outline-secondary btn-sm rounded-pill" %>
+        <% end %>
+      </div>
+
       <div class="mb-2">
         <i class="fa-solid fa-tag"></i>　レビュータグで検索する
       </div>
