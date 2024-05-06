@@ -8,7 +8,7 @@ class User::MoviesController < ApplicationController
     if params[:looking_for].present? 
       movie_title = params[:looking_for]
       movies = []
-      (1..5).each do |page|
+      (1..50).each do |page|
         url = "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['TMDB_API_KEY']}&language=ja&query=" + URI.encode_www_form_component(movie_title) + "&page=#{page}"
         response = Net::HTTP.get_response(URI.parse(url))
         if response.code == "200"

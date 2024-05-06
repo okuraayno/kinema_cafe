@@ -9,7 +9,7 @@ class User::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @comment = Comment.new
     @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
-
+    @keywords = Language.get_data(@movie['overview'])
   end
 
   def new
@@ -19,6 +19,7 @@ class User::ReviewsController < ApplicationController
       @review = Review.new
     end
     @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
+    @keywords = Language.get_data(@movie['overview'])
   end
 
   def create
@@ -41,6 +42,7 @@ class User::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @rating = @review.star
     @average_score = Review.where(movie_id: @movie['id']).average(:star).to_f.round(1)
+    @keywords = Language.get_data(@movie['overview'])
   end
 
   def update

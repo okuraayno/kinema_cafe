@@ -1,11 +1,15 @@
 class User::KeywordsController < ApplicationController
 
-  def search
-    @keyword = params[:keyword]
-    @movies = []
-    (1..100).each do |page|
-      url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=ja&page=#{page}&include_adult=false"
+def search
+  @keyword = params[:keyword]
+  @movies = []
+  threads = []
+
+  (1..500).each do |page|
+    threads << Thread.new(page) do |p| # 1ページ1スレッドで同時にデータを取得する
+      url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=ja&page=#{p}&include_adult=false&include_video=false"
       response = Net::HTTP.get_response(URI.parse(url))
+      
       if response.code == "200"
         movies = JSON.parse(response.body)
         movies['results'].each do |movie|
@@ -15,9 +19,12 @@ class User::KeywordsController < ApplicationController
         end
       end
     end
-
-    @movies = Kaminari.paginate_array(@movies).page(params[:page]).per(20)
-    render "user/keywords/index"
   end
+
+  threads.each(&:join)  # 全てのスレッドの終了を待つ
+  @movies = Kaminari.paginate_array(@movies).page(params[:page]).per(20)
+  render "user/keywords/index"
+end
+
 
 end
