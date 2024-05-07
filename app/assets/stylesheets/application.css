@@ -365,3 +365,22 @@ color: #801E1E;
     -moz-opacity: 0.5;
     opacity: 0.5;
 }
+
+/*検索方法欄*/
+.arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  content: "";
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid transparent;
+  transition: transform 0.3s ease;
+}
+
+/* コラプスが開いた状態で上向き */
+[data-toggle="collapse"][aria-expanded="true"] .arrow {
+  transform: rotate(180deg);
+}
