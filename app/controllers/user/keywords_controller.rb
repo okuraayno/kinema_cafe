@@ -9,7 +9,6 @@ class User::KeywordsController < ApplicationController
       threads << Thread.new(page) do |p| # 1ページ1スレッドで並行してデータを取得する
         url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=ja&page=#{p}&include_adult=false&include_video=false"
         response = Net::HTTP.get_response(URI.parse(url))
-
         if response.code == "200"
           movies = JSON.parse(response.body)
           movies['results'].each do |movie|
