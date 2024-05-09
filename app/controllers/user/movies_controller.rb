@@ -58,6 +58,7 @@ class User::MoviesController < ApplicationController
 
   private
 
+  # レビュータグ表示用
   def fetch_top_tags
     tag_count = Review.where.not(tag: [nil, ""]).group(:tag).count
     sorted_tags = tag_count.sort_by { |_, count| -count }
