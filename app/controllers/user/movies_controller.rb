@@ -1,5 +1,5 @@
 class User::MoviesController < ApplicationController
-  # 非ログイン時にアクセスするとログイン画面に遷移
+
   before_action :authenticate_user!
   before_action :set_movie, only: [:show]
 
