@@ -36,6 +36,7 @@ color: #801E1E;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .square-button2 {
@@ -47,6 +48,7 @@ color: #801E1E;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .footer {
@@ -78,6 +80,7 @@ color: #801E1E;
     border-radius: 50%;
     opacity:1;
     animation:1s circleanime2 forwards;
+    box-sizing: border-box;
 }
 
 @keyframes circleanime2{
@@ -141,93 +144,6 @@ color: #801E1E;
   opacity: 1;
 }
 
-.btnlinestretches2{
-  position:relative;
-  color:#333;
-  padding: 10px 30px;
-  display:inline-block;
-  text-decoration: none;
-  outline: none;
-}
-
-.btnlinestretches2::before,
-.btnlinestretches2::after {
-  content:'';
-  position:absolute;
-  border:solid #333;
-  width:10px;
-  height:10px;
-  transition:all 0.3s ease-in-out;
-}
-
-.btnlinestretches2::before{
-  top:0;
-  left:0;
-  border-width:2px 0 0 2px;
-}
-
-.btnlinestretches2::after{
-  bottom:0;
-  right:0;
-  border-width:0 2px 2px 0;
-}
-
-.btnlinestretches2:hover::before,
-.btnlinestretches2:hover::after{
-  width:calc(100% - 2px);
-  height:calc(100% - 2px);
-  border-color:#666
-}
-
-.btn06{
-  position: relative;
-  text-decoration: none;
-  display: inline-block;
-  background:#333;
-  color:#fff;
-  padding: 10px 40px 10px 30px;
-  border-radius:25px;
-  text-align: center;
-  outline: none;
-  transition: ease .2s;
-}
-
-.btn06:hover{
-  background:#555;
-}
-
-.btnarrow{
-  position: relative;
-  display: inline-block;
-  padding: 0 20px;
-  color: #333;
-  text-decoration: none;
-  outline: none;
-}
-
-.btnarrow::before{
-  content: '';
-  position: absolute;
-  bottom:-8px;
-  left:15%;
-  width: 85%;
-  height: 1px;
-  background:#333;
-  transition: all .3s;
-}
-
-.btnarrow::after{
-  content: '';
-  position: absolute;
-  bottom:-3px;
-  right:0;
-  width: 15px;
-  height:1px;
-  background:#333;
-  transform: rotate(35deg);
-  transition: all .3s;
-}
-
 /*ログイン・新規登録ボタン*/
 .btntransform{
   position: relative;
@@ -264,6 +180,7 @@ color: #801E1E;
   border-top: 1px solid #000;
   border-right: 1px solid #000;
   transform: rotate(45deg);
+  box-sizing: border-box;
 }
 
 /*流れるテキスト*/
@@ -323,7 +240,7 @@ color: #801E1E;
   width: 150px;
   position: relative;
   margin-right: 20px;
-  padding: 10px 20px;
+  padding: 10px 25px;
   background-image:
     radial-gradient(circle, white 2px, #ddcdb3 3px 7px, transparent 8px),
     linear-gradient(135deg, transparent 10px, #ddcdb3 11px),
@@ -334,36 +251,6 @@ color: #801E1E;
   font-weight: bold;
   font-size: 8px;
   overflow: hidden;
-}
-
-/*ページトップへのスクロール*/
-.pagetop {
-    display: none;
-    position: fixed;
-    bottom: 30px;
-    right: 15px;
-}
-.pagetop a {
-    display: block;
-    text-align: center;
-    color: #222;
-    font-size: 12px;
-    text-decoration: none;
-    padding: 5px 10px;
-	filter:alpha(opacity=50);
-    -moz-opacity: 0.5;
-    opacity: 0.5;
-}
-.pagetop a:hover {
-    display: block;
-    text-align: center;
-    color: #fff;
-    font-size: 12px;
-    text-decoration: none;
-    padding:5px 10px;
-    filter:alpha(opacity=50);
-    -moz-opacity: 0.5;
-    opacity: 0.5;
 }
 
 /*検索方法欄*/
