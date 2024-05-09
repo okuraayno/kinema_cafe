@@ -7,6 +7,19 @@ class User::TagsController < ApplicationController
     @movie_ids = Review.where(tag: @content).distinct(:movie_id).pluck(:movie_id)
     @movies = @movie_ids.map { |movie_id| Movie.fetch_movie_data(movie_id) }
     @movies = Kaminari.paginate_array(@movies).page(params[:page]).per(20)
+
+  # 各映画に評価平均値、いいねの判定、レビューの判定を追加
+    @movies.each do |movie|
+      reviews = Review.where(movie_id: movie['id'])
+      average_score = reviews.average(:star).to_f.round(1)
+      favorited = current_user.favorites.exists?(movie_id: movie['id'])
+      reviewed = current_user.reviews.exists?(movie_id: movie['id'])
+
+      movie['average_score'] = average_score
+      movie['favorited'] = favorited
+      movie['reviewed'] = reviewed
+    end
+
     render "user/tags/index"
   end
 

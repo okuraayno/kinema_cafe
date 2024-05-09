@@ -13,55 +13,51 @@
       </div>
 
       <div class="card-body">
-        <% if controller_name == 'movies' %>
-          <div class="d-flex flex-row mb-1">
-            <% if movie['favorited'] %>
-              <div class="square-button mr-2">
-                <i class="fa-solid fa-heart"></i>
-              </div>
-            <% else %>
-              <div class="square-button2 mr-2">
-                <i class="fa-solid fa-heart"></i>
-              </div>
-            <% end %>
+        <div class="d-flex flex-row mb-1">
+          <% if movie['favorited'] %>
+            <div class="square-button mr-2">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+          <% else %>
+            <div class="square-button2 mr-2">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+          <% end %>
 
-            <% if movie['reviewed'] %>
-              <div class="square-button">
-                <i class="fa-solid fa-feather"></i>
-              </div>
-            <% else %>
-              <div class="square-button2">
-                <i class="fa-solid fa-feather"></i>
-              </div>
-            <% end %>
-          </div>
+          <% if movie['reviewed'] %>
+            <div class="square-button">
+              <i class="fa-solid fa-feather"></i>
+            </div>
+          <% else %>
+            <div class="square-button2">
+              <i class="fa-solid fa-feather"></i>
+            </div>
+          <% end %>
+        </div>
 
-          <div class="average_stars" data-score="<%= movie['average_score'] || 0 %>"></div>
-          <div class="average_star"><%= movie['average_score'] || 0 %>/5点</div>
-          <script>
-            $(document).on('turbolinks:load', function() {
-              let elements = document.querySelectorAll('.average_stars');
-              elements.forEach(function(element) {
-                let score = element.dataset.score;
-                if(element == null) return;
-                element.innerHTML = "";
-                let opt = {
-                  starOn: "<%= asset_path('star-on.png') %>",
-                  starOff: "<%= asset_path('star-off.png') %>",
-                  starHalf: "<%= asset_path('star-half.png') %>",
-                  scoreName: 'review[star]',
-                  half: true,
-                  readOnly: true,
-                  score: score || 0,
-                };
-                raty(element, opt);
-              });
+        <div class="average_stars" data-score="<%= movie['average_score'] || 0 %>"></div>
+        <div class="average_star"><%= movie['average_score'] || 0 %>/5点</div>
+        <script>
+          $(document).on('turbolinks:load', function() {
+            let elements = document.querySelectorAll('.average_stars');
+            elements.forEach(function(element) {
+              let score = element.dataset.score;
+              if(element == null) return;
+              element.innerHTML = "";
+              let opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                scoreName: 'review[star]',
+                half: true,
+                readOnly: true,
+                score: score || 0,
+              };
+              raty(element, opt);
             });
-          </script>
-        <% else %>
-        <% end %>
+          });
+        </script>
       </div>
-
     </div>
   <% end %>
 </div>
