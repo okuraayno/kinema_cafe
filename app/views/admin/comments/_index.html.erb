@@ -11,7 +11,7 @@
       <div class="ml-3">
         <%= comment.comment %><br>
         <%= comment.created_at.strftime('%Y/%m/%d') %>
-        <%= link_to "不適切なコメントとして削除", admin_review_comment_path(review.id, comment.id), method: :delete, remote: true %>
+        <%= link_to "不適切なコメントとして削除", admin_review_comment_path(review.id, comment.id), method: :delete, remote: true, data: { confirm: "不適切なコメントとして削除しますか？" }  %>
       </div>
     </div>
   <% end %>

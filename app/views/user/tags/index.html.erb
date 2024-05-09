@@ -7,9 +7,12 @@
         <%= render 'user/movies/index', movies: @movies %>
         <hr>
       </div>
-      <div class="text-center">
+
+      <div class="pagination justify-content-center mb-3">
         <%= paginate @movies %>
-        <%= link_to 'Back', movies_path, class: "back" %>
+      </div>
+      <div class="text-center mb-3">
+        <%= link_to "戻る", movies_path, class: "back" %>
       </div>
     </div>
   </div>

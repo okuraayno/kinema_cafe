@@ -37,15 +37,15 @@
           <% end %>
         </div>
       </div>
-
       <hr>
+
       <div>
         <%= render 'index', moviews: @moviews %>
         <hr>
       </div>
     </div>
 
-    <div class="text-center my-3">
+    <div class="pagination justify-content-center mb-3">
       <%= paginate @movies %>
     </div>
   </div>

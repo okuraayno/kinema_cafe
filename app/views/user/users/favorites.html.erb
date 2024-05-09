@@ -27,17 +27,13 @@
       <% else %>
         <p class="text-center mt-5">まだいいねをしていません</p>
       <% end %>
-    <hr>
+      <hr>
     </div>
 
-    <p class="pagetop float1">
-      <a href="#container">
-        <i class="fa-solid fa-angles-up"></i>
-      </a>
-    </p>
-
-    <div class="text-center my-3">
+    <div class="pagination justify-content-center mb-3">
       <%= paginate @favorites %>
+    </div>
+    <div class="text-center mb-3">
       <%= link_to "戻る", user_path(@user) %>
     </div>
   </div>

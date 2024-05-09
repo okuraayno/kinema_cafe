@@ -1,4 +1,6 @@
 class User::KeywordsController < ApplicationController
+  # 非ログイン時にアクセスするとログイン画面に遷移
+  before_action :authenticate_user!
 
   def search
     @keyword = params[:keyword]

@@ -4,8 +4,7 @@ class User::MoviesController < ApplicationController
   before_action :set_movie, only: [:show]
 
   def index
-    # フォームから受け取った値で映画検索
-    if params[:looking_for].present? 
+    if params[:looking_for].present? # フォームから受け取った値で映画検索
       movie_title = params[:looking_for]
       movies = []
       (1..50).each do |page|
@@ -17,8 +16,7 @@ class User::MoviesController < ApplicationController
         end
       end
     else
-      # 検索フォームが空の場合
-      movies = []
+      movies = [] # 検索フォームが空の場合
       (1..5).each do |page|
         url = "https://api.themoviedb.org/3/movie/now_playing?api_key=#{ENV['TMDB_API_KEY']}&language=ja&page=#{page}"
         response = Net::HTTP.get_response(URI.parse(url))
@@ -28,23 +26,8 @@ class User::MoviesController < ApplicationController
         end
       end
     end
+
     @movies = Kaminari.paginate_array(movies).page(params[:page]).per(20)
-     # 各ムービーの評価平均値
-    @movies.each do |movie|
-      reviews = Review.where(movie_id: movie['id'])
-      average_score = reviews.average(:star).to_f.round(1)
-      movie['average_score'] = average_score
-    end
-    # すでにcurrent_userがいいねをしているか判定
-    @movies.each do |movie|
-      favorited = current_user.favorites.exists?(movie_id: movie['id'])
-      movie['favorited'] = favorited
-    end
-    # すでにcurrent_userがレビューをしているか判定
-    @movies.each do |movie|
-      reviewed = current_user.reviews.exists?(movie_id: movie['id'])
-      movie['reviewed'] = reviewed
-    end
     @tags = fetch_top_tags
   end
 

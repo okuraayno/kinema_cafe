@@ -58,7 +58,7 @@
             <p class="mt-2 mr-5 text-right">
               <%= link_to "編集", edit_movie_review_path(@review.movie_id, @review.id) %>
               <span>|</span>
-              <%= link_to "削除", @reviews, method: :delete, data: { confirm: '本当に消しますか？' } %>
+              <%= link_to "削除", @reviews, method: :delete, data: { confirm: "本当に消しますか？" } %>
             </p>
           <% end %>
 

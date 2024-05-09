@@ -9,12 +9,15 @@
       <% else %>
         <p class="text-center my-5">ユーザーはいません</p>
       <% end %>
-    <hr>
+      <hr>
     </div>
 
-    <div class="text-center my-3">
-      <%= link_to "戻る", user_path(@user) %>
+    <div class="pagination justify-content-center mb-3">
       <%= paginate @users %>
+    </div>
+
+    <div class="text-center mb-3">
+      <%= link_to "戻る", user_path(@user) %>
     </div>
   </div>
 </div>
