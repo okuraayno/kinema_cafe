@@ -6,7 +6,6 @@ class User::SearchesController < ApplicationController
     @content = params[:content]
     @method = params[:method]
     @model = "user"
-      @records = User.search_for(@content, @method)
+    @records = User.search_for(@content, @method)
   end
-
 end

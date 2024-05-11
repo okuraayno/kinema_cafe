@@ -1,5 +1,4 @@
 class User::FavoritesController < ApplicationController
-
   before_action :set_movie, only: [:create, :update]
 
   def create
@@ -18,5 +17,4 @@ class User::FavoritesController < ApplicationController
   def set_movie
     @movie = Movie.fetch_movie_data(params[:movie_id])
   end
-
 end
