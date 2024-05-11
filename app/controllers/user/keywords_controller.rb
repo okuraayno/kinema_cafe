@@ -7,12 +7,12 @@ class User::KeywordsController < ApplicationController
     @movies = []
     threads = []
 
-    (1..300).each do |page|
+    (1..200).each do |page|
       threads << Thread.new(page) do |p| # 1ページ1スレッドで並行してデータを取得する
         url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=ja&page=#{p}&include_adult=false&include_video=false"
-        response = Net::HTTP.get_response(URI.parse(url))
+        response = Net::HTTP.get_response(URI.parse(url)) # URLにGETリクエストを送信、レスポンスを取得
         if response.code == "200"
-          movies = JSON.parse(response.body)
+          movies = JSON.parse(response.body) # レスポンスのハッシュ化
           movies['results'].each do |movie|
             if movie['overview'].include?(@keyword) # あらすじにキーワードが含まれるか判別
               @movies << movie
@@ -21,12 +21,11 @@ class User::KeywordsController < ApplicationController
         end
       end
     end
-
-    threads.each(&:join)  # 全てのスレッドの終了を待つ
+    threads.each(&:join) # 全てのスレッドの実行・終了を待つ
 
     @movies = Kaminari.paginate_array(@movies).page(params[:page]).per(20)
 
-  # 各映画に評価平均値、いいねの判定、レビューの判定を追加
+  # 各映画の評価平均値、いいねの判定、レビューの判定
     @movies.each do |movie|
       reviews = Review.where(movie_id: movie['id'])
       average_score = reviews.average(:star).to_f.round(1)
@@ -40,5 +39,4 @@ class User::KeywordsController < ApplicationController
 
     render "user/keywords/index"
   end
-
 end
