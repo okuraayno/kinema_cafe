@@ -58,3 +58,5 @@
 # Review.create(user_id:'28' , movie_id:'603' , title:'Matrix' , comment:'This film offers deep insights and reflections to its viewers. Its questioning of human existence and the nature of reality brings new insights with each viewing.' , star:'2.5' , spoiler:'true' )
 # Review.create(user_id:'29' , movie_id:'603' , title:'よかった' , comment:'やっぱり1が好き' , star:'3' , spoiler:'false' )
 # Review.create(user_id:'30' , movie_id:'603' , title:'よかった' , comment:'面白かった' , star:'4' , spoiler:'false' )
+
+User.create(name: 'テストユーザー', email: 'test@aaaaaa', is_active: true, password: '123456' )
