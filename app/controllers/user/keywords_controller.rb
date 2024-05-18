@@ -18,6 +18,9 @@ class User::KeywordsController < ApplicationController
               @movies << movie
             end
           end
+        else
+          flash[:notice] = "しばらくしてから再度お試しください。"
+
         end
       end
     end

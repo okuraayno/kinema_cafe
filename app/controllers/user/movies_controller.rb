@@ -14,6 +14,8 @@ class User::MoviesController < ApplicationController
         if response.code == "200"
           result = JSON.parse(response.body) # レスポンスのハッシュ化
           movies.concat(result["results"]) # resultsの中の要素を個別に扱えるようmoviesに格納
+        else
+          flash[:notice] = "しばらくしてから再度お試しください。"
         end
       end
     else
@@ -25,6 +27,8 @@ class User::MoviesController < ApplicationController
         if response.code == "200"
           result = JSON.parse(response.body) # レスポンスのハッシュ化
           movies.concat(result["results"]) # resultsの中の要素を個別に扱えるようmoviesに格納
+        else
+          flash[:notice] = "しばらくしてから再度お試しください。"
         end
       end
     end
