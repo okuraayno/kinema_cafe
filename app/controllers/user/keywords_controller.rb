@@ -20,7 +20,7 @@ class User::KeywordsController < ApplicationController
           end
         else
           flash[:notice] = "しばらくしてから再度お試しください。"
-
+          Thread.current.exit
         end
       end
     end
