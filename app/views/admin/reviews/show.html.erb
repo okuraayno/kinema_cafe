@@ -40,7 +40,7 @@
           </script>
           <tr>
             <td>
-              <%= @review.comment %>
+              <%= simple_format(@review.comment, sanitize: true) %>
             </td>
           </tr>
           <tr>

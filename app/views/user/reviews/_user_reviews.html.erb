@@ -41,13 +41,13 @@
             <i class="fa-solid fa-triangle-exclamation"></i> ネタバレを表示する
           </a>
           <div class="collapse" id="example_<%= review.id %>">
-            <%= review.comment %>
+            <%= simple_format(review.comment, sanitize: true) %>
             <% if review.tag.present? %>
               <p class="mt-3 mr-5"><%= link_to review.tag, tags_path(tag: review.tag), class: "tag" %></p>
             <% end %>
           </div>
         <% else %>
-          <%= review.comment %>
+          <%= simple_format(review.comment, sanitize: true) %>
           <% if review.tag.present? %>
             <p class="mt-3 mr-5"><%= link_to review.tag, tags_path(tag: review.tag), class: "tag" %></p>
           <% end %>
