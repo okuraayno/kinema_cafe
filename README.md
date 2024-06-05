@@ -34,7 +34,11 @@
 
 
 ### 設計書
-後ほど作成予定
+- UI　Flow図
+![ポートフォリオ制作_UIFlows_](https://github.com/okuraayno/kinema_cafe/assets/158453026/934cff4b-8797-4d38-afac-8dad44d0f54c)
+
+- ER図
+![ER図](https://github.com/okuraayno/kinema_cafe/assets/158453026/c52ab315-e5ab-4647-b079-46f706c6b0d1)
 
 
 ### 開発環境
