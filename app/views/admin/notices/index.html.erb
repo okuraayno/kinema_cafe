@@ -20,7 +20,9 @@
         <tbody>
           <tr>
             <td class="text-center"><%= notice.created_at %></td>
-            <td class="text-center"><%= notice.title %></td>
+            <td class="text-center">
+              <%= link_to notice.title, admin_notice_path(notice) %>
+            </td>
           </tr>
         </tbody>
         <% end %>
