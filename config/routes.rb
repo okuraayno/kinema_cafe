@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "members#index"
     resources :members, only: [:show, :update]
-    resources :notices, only: [:index, :show, :edit, :update, :destroy]
+    resources :notices, only: [:index, :show, :new, :create, :edit, :update, :destroy]
     resources :reviews, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]
     end
